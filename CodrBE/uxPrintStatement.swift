@@ -10,8 +10,6 @@ import UIKit
 
 class uxPrintStatement: uxStatement
 {
-    var value : uxExpression!
-    
     override func toJSON() -> String
     {
         return "{\"type\":\"print\",\"value\":\(self.value.toJSON())}"

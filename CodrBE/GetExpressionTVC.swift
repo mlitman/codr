@@ -10,12 +10,18 @@ import UIKit
 
 class GetExpressionTVC: UITableViewController
 {
-    var nextScreen = "NONE"
-    var theExpressions : [String] = ["Literal","Remember","Math","Boolean"]
-    var theStatement : uxStatement?
-    var theMathExpression: uxMathExpression?
+    var wasRowSelected = false
     
-    override func viewDidLoad() {
+    override func viewWillAppear(animated: Bool)
+    {
+        if(self.wasRowSelected)
+        {
+            CodrCore.popExpression()
+            wasRowSelected = false
+        }
+    }
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
 
         // Uncomment the following line to preserve selection between presentations
@@ -32,28 +38,23 @@ class GetExpressionTVC: UITableViewController
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        if(self.theExpressions[indexPath.row] == "Literal")
+        self.wasRowSelected = true
+        
+        if(CodrCore.theExpressionTypes[indexPath.row] == "Literal")
         {
+            CodrCore.pushExpression(uxLitExpression())
             var litExpVC = self.storyboard?.instantiateViewControllerWithIdentifier("LitExpressionVC") as! LitExpressionVC
-            litExpVC.theStatement = self.theStatement!
-            if(self.nextScreen != "NONE")
-            {
-                litExpVC.nextScreen = self.nextScreen
-            }
             self.navigationController?.pushViewController(litExpVC, animated: true)
         }
-        else if(self.theExpressions[indexPath.row] == "Remember")
+        else if(CodrCore.theExpressionTypes[indexPath.row] == "Remember")
         {
+            CodrCore.pushExpression(uxVarExpression())
             var remExpVC = self.storyboard?.instantiateViewControllerWithIdentifier("RememberListTVC") as! RememberListTVC
-            remExpVC.theStatement = self.theStatement!
-            if(self.nextScreen != "NONE")
-            {
-                remExpVC.nextScreen = self.nextScreen
-            }
             self.navigationController?.pushViewController(remExpVC, animated: true)
         }
-        else if(self.theExpressions[indexPath.row] == "Math")
+        else if(CodrCore.theExpressionTypes[indexPath.row] == "Math")
         {
+            CodrCore.pushExpression(uxMathExpression())
             var mathExpVC = self.storyboard?.instantiateViewControllerWithIdentifier("MathExpVC") as! MathExpVC
             self.navigationController?.pushViewController(mathExpVC, animated: true)
 
@@ -72,7 +73,7 @@ class GetExpressionTVC: UITableViewController
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return self.theExpressions.count
+        return CodrCore.theExpressionTypes.count
     }
 
     
@@ -80,7 +81,7 @@ class GetExpressionTVC: UITableViewController
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! UITableViewCell
 
         // Configure the cell...
-        cell.textLabel!.text = self.theExpressions[indexPath.row]
+        cell.textLabel!.text = CodrCore.theExpressionTypes[indexPath.row]
         return cell
     }
     

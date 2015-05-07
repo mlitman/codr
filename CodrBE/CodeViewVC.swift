@@ -11,10 +11,6 @@ import UIKit
 class CodeViewVC: UITableViewController
 {
     @IBOutlet var tv: UITableView!
-    var theToolBox : [String] = ["Create Remember","Change Remember","Print"]
-    
-    static var theStatements = [uxStatement]()
-    static var currExpression : uxExpression?
     @IBAction func runButtonPressed(sender: UIBarButtonItem)
     {
         var mainVC = self.storyboard?.instantiateViewControllerWithIdentifier("MainVC") as! MainVC
@@ -28,7 +24,7 @@ class CodeViewVC: UITableViewController
         var answer = ""
         var header = "{\"statements\":["
         var footer = "]}"
-        for stmt in CodeViewVC.theStatements
+        for stmt in CodrCore.theProgram
         {
             if(count(answer) == 0)
             {
@@ -75,11 +71,11 @@ class CodeViewVC: UITableViewController
         // Return the number of rows in the section.
         if(section == 0)
         {
-            return self.theToolBox.count
+            return CodrCore.theToolBox.count
         }
         else
         {
-            return CodeViewVC.theStatements.count
+            return CodrCore.theProgram.count
         }
     }
 
@@ -102,15 +98,13 @@ class CodeViewVC: UITableViewController
         // Configure the cell...
         if(indexPath.section == 0)
         {
-            cell.textLabel!.text = self.theToolBox[indexPath.row]
+            cell.textLabel!.text = CodrCore.theToolBox[indexPath.row]
             cell.editing = false
         }
         else
         {
-            cell.textLabel!.text = CodeViewVC.theStatements[indexPath.row].displayValue()
+            cell.textLabel!.text = CodrCore.theProgram[indexPath.row].displayValue()
         }
-
-        
         return cell
     }
 
@@ -119,22 +113,23 @@ class CodeViewVC: UITableViewController
     {
         if(indexPath.section == 0)
         {
-            if(self.theToolBox[indexPath.row] == "Create Remember")
+            if(CodrCore.theToolBox[indexPath.row] == "Create Remember")
             {
+                CodrCore.pushStatement(uxRememberStatement())
                 var remStmtVC = self.storyboard?.instantiateViewControllerWithIdentifier("RememberStatementVC") as! RememberStatementVC
                 self.navigationController?.pushViewController(remStmtVC, animated: true)
             }
-            else if(self.theToolBox[indexPath.row] == "Change Remember")
+            else if(CodrCore.theToolBox[indexPath.row] == "Change Remember")
             {
+                //****CHECK THE LINE BELOW
+                CodrCore.pushStatement(uxRememberSetStatement())
                 var remListTVC = self.storyboard?.instantiateViewControllerWithIdentifier("RememberListTVC") as! RememberListTVC
-                remListTVC.nextScreen = "Change Remember"
                 self.navigationController?.pushViewController(remListTVC, animated: true)
             }
-            else if(self.theToolBox[indexPath.row] == "Print")
+            else if(CodrCore.theToolBox[indexPath.row] == "Print")
             {
-                var thePrintStatement = uxPrintStatement()
+                CodrCore.pushStatement(uxPrintStatement())
                 var getExpressionTVC = self.storyboard?.instantiateViewControllerWithIdentifier("GetExpressionTVC") as! GetExpressionTVC
-                getExpressionTVC.theStatement = thePrintStatement
                 self.navigationController?.pushViewController(getExpressionTVC, animated: true)
             }
         }
@@ -169,9 +164,9 @@ class CodeViewVC: UITableViewController
     {
         if(fromIndexPath.section == 1)
         {
-            var temp = CodeViewVC.theStatements[fromIndexPath.row]
-            CodeViewVC.theStatements[toIndexPath.row] = CodeViewVC.theStatements[fromIndexPath.row]
-            CodeViewVC.theStatements[fromIndexPath.row] = temp
+            var temp = CodrCore.theProgram[fromIndexPath.row]
+            CodrCore.theProgram[toIndexPath.row] = CodrCore.theProgram[fromIndexPath.row]
+            CodrCore.theProgram[fromIndexPath.row] = temp
         }
     }
     

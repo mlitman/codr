@@ -11,10 +11,9 @@ import UIKit
 class uxVarExpression: uxExpression
 {
     var name:String!
-    
-    init(name: String)
+    override init()
     {
-        self.name = name
+        self.name = ""
     }
     
     override func toJSON() -> String

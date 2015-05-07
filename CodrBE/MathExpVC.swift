@@ -10,37 +10,69 @@ import UIKit
 
 class MathExpVC: UIViewController
 {
+    @IBOutlet weak var saveButton : UIButton!
+    @IBOutlet weak var leftButton : UIButton!
+    @IBOutlet weak var rightButton : UIButton!
+    @IBOutlet weak var rightOperandValueLabel: UILabel!
+    @IBOutlet weak var leftOperandValueLabel: UILabel!
     @IBOutlet weak var opSegments: UISegmentedControl!
-    var ops = ["+","-","*","/"]
-    var selectedIndex = 0
-    var theExpression : uxMathExpression?
+    var lastClickedButton : UIButton?
+    
+    func setExpressionLabel()
+    {
+        if(self.lastClickedButton == self.leftButton)
+        {
+            self.leftOperandValueLabel.text = CodrCore.expressions.last!.displayValue()
+            var tempExp = CodrCore.popExpression()
+            (CodrCore.expressions.last as! uxMathExpression).lrand = tempExp
+        }
+        else if(self.lastClickedButton == self.rightButton)
+        {
+            self.rightOperandValueLabel.text = CodrCore.expressions.last!.displayValue()
+            var tempExp = CodrCore.popExpression()
+            (CodrCore.expressions.last as! uxMathExpression).rrand = tempExp
+        }
+        
+        //should we enable the save button?
+        if(self.leftOperandValueLabel != "NEW" &&
+        self.rightOperandValueLabel != "NEW")
+        {
+            self.saveButton!.enabled = true
+        }
+        else
+        {
+            self.saveButton!.enabled = false
+        }
+        
+    }
+    
+    @IBAction func saveButtonPressed(sender: AnyObject)
+    {
+    }
     
     @IBAction func setRightOpButtonPressed(sender: AnyObject)
     {
+        self.lastClickedButton = rightButton
         var getExpressionTVC = self.storyboard?.instantiateViewControllerWithIdentifier("GetExpressionTVC") as! GetExpressionTVC
-        theExpression!.op!  = self.ops[self.selectedIndex]
-        getExpressionTVC.nextScreen = "Get Right Math Operand"
-        getExpressionTVC.theMathExpression = theExpression
         self.navigationController?.pushViewController(getExpressionTVC, animated: true)
     }
+    
     @IBAction func setLeftOpButtonPressed(sender: AnyObject)
     {
+        self.lastClickedButton = leftButton
         var getExpressionTVC = self.storyboard?.instantiateViewControllerWithIdentifier("GetExpressionTVC") as! GetExpressionTVC
-        self.theExpression!.op!  = self.ops[self.selectedIndex]
-        getExpressionTVC.nextScreen = "Get Left Math Operand"
-        getExpressionTVC.theMathExpression = theExpression
         self.navigationController?.pushViewController(getExpressionTVC, animated: true)
     }
 
     @IBAction func opSegmentChanged(sender: UISegmentedControl)
     {
-        self.selectedIndex = sender.selectedSegmentIndex
+        (CodrCore.expressions.last as! uxMathExpression).op = CodrCore.theMathOps[sender.selectedSegmentIndex]
     }
 
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
-        self.opSegments.selectedSegmentIndex = self.selectedIndex
-        theExpression = uxMathExpression()
+        (CodrCore.expressions.last as! uxMathExpression).op = CodrCore.theMathOps[opSegments.selectedSegmentIndex]
         // Do any additional setup after loading the view.
     }
 

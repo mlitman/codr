@@ -10,9 +10,14 @@ import UIKit
 
 class uxLitExpression: uxExpression
 {
-    var value:String!
+    var value : String
     
-    init(value: String)
+    override init()
+    {
+        self.value = ""
+    }
+    
+    init(var value : String)
     {
         self.value = value
     }
@@ -24,7 +29,7 @@ class uxLitExpression: uxExpression
     
     override func displayValue() -> String
     {
-        return value!
+        return self.value
     }
 
 }

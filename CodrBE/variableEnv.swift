@@ -45,6 +45,7 @@ class variableEnv: NSObject
     
     func resolveRemember(name: String) -> String
     {
+        println("Looking for \(name)")
         for remember in env
         {
             if(remember.name == name)

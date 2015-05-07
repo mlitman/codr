@@ -10,13 +10,7 @@ import UIKit
 
 class uxRememberStatement: uxStatement
 {
-    var name : String!
-    var value : uxExpression!
-    
-    init(name : String)
-    {
-        self.name = name
-    }
+    var name = ""
     
     override func toJSON() -> String
     {

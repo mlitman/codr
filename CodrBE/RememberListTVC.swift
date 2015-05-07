@@ -10,20 +10,12 @@ import UIKit
 
 class RememberListTVC: UITableViewController
 {
-    var theRemembers = [uxRememberStatement]()
+    var theRemembers : [uxRememberStatement]!
     var theStatement : uxStatement?
-    var nextScreen = "NONE"
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        for stmt in CodeViewVC.theStatements
-        {
-            if(stmt is uxRememberStatement)
-            {
-                self.theRemembers.append(stmt as! uxRememberStatement)
-            }
-        }
-        // Uncomment the following line to preserve selection between presentations
+        self.theRemembers = CodrCore.getRememberStatements()        // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
@@ -59,28 +51,20 @@ class RememberListTVC: UITableViewController
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        //is this the end of the line?
-        if(self.nextScreen == "NONE")
+        //what kind of statement is expecting my value?
+        if(CodrCore.statements.last is uxPrintStatement)
         {
-            if(self.theStatement! is uxRememberStatement)
-            {
-                (self.theStatement as! uxRememberStatement).value = uxVarExpression(name: self.theRemembers[indexPath.row].name)
-                CodeViewVC.theStatements.append(self.theStatement!)
-                self.navigationController?.popToRootViewControllerAnimated(true)
-            }
-            else if(self.theStatement! is uxPrintStatement)
-            {
-                (self.theStatement as! uxPrintStatement).value = uxVarExpression(name: self.theRemembers[indexPath.row].name)
-                CodeViewVC.theStatements.append(self.theStatement!)
-                self.navigationController?.popToRootViewControllerAnimated(true)
-            }
+            (CodrCore.expressions.last as! uxVarExpression).name = self.theRemembers[indexPath.row].name
+            (CodrCore.statements.last as! uxPrintStatement).value = CodrCore.popExpression()
+            CodrCore.addStatementToProgram(CodrCore.popStatement())
+            self.navigationController?.popToViewController(self.navigationController!.viewControllers[self.navigationController!.viewControllers.count-3] as! UIViewController, animated: true)
         }
-        else if(self.nextScreen == "Change Remember")
+        else if(CodrCore.statements.last is uxRememberStatement)
         {
-            var remStmtVC = self.storyboard?.instantiateViewControllerWithIdentifier("RememberStatementVC") as! RememberStatementVC
-            remStmtVC.theRememberStatement = self.theRemembers[indexPath.row]
-            remStmtVC.nextScreen = "Change Remember"
-            self.navigationController?.pushViewController(remStmtVC, animated: true)
+            (CodrCore.expressions.last as! uxVarExpression).name = self.theRemembers[indexPath.row].name
+            var rsvc = self.navigationController!.viewControllers[self.navigationController!.viewControllers.count-3] as! RememberStatementVC
+            rsvc.currValueLabel.text = self.theRemembers[indexPath.row].name
+            self.navigationController?.popToViewController(self.navigationController!.viewControllers[self.navigationController!.viewControllers.count-3] as! UIViewController, animated: true)
         }
 
     }

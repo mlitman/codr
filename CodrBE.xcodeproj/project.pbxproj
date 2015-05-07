@@ -23,6 +23,7 @@
 		683187EA1AE300E80065AE21 /* rememberStmt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683187E91AE300E80065AE21 /* rememberStmt.swift */; };
 		683187EC1AE3026C0065AE21 /* variableEnv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683187EB1AE3026C0065AE21 /* variableEnv.swift */; };
 		683187F01AE314930065AE21 /* mathExpr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683187EF1AE314930065AE21 /* mathExpr.swift */; };
+		6846777F1AF79E76007C6344 /* CodrCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6846777E1AF79E76007C6344 /* CodrCore.swift */; };
 		688C3FA71AE38B3B00280814 /* CodeViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688C3FA61AE38B3B00280814 /* CodeViewVC.swift */; };
 		688C3FA91AE3928900280814 /* RememberStatementVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688C3FA81AE3928900280814 /* RememberStatementVC.swift */; };
 		688C3FAB1AE3968700280814 /* LitExpressionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688C3FAA1AE3968700280814 /* LitExpressionVC.swift */; };
@@ -70,6 +71,7 @@
 		683187E91AE300E80065AE21 /* rememberStmt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = rememberStmt.swift; sourceTree = "<group>"; };
 		683187EB1AE3026C0065AE21 /* variableEnv.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = variableEnv.swift; sourceTree = "<group>"; };
 		683187EF1AE314930065AE21 /* mathExpr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mathExpr.swift; sourceTree = "<group>"; };
+		6846777E1AF79E76007C6344 /* CodrCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodrCore.swift; sourceTree = "<group>"; };
 		688C3FA61AE38B3B00280814 /* CodeViewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeViewVC.swift; sourceTree = "<group>"; };
 		688C3FA81AE3928900280814 /* RememberStatementVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RememberStatementVC.swift; sourceTree = "<group>"; };
 		688C3FAA1AE3968700280814 /* LitExpressionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LitExpressionVC.swift; sourceTree = "<group>"; };
@@ -128,8 +130,6 @@
 				688C3FA51AE38B0E00280814 /* Interface Objects */,
 				683187E81AE300B60065AE21 /* Language Objects */,
 				683187C01AE2C95F0065AE21 /* AppDelegate.swift */,
-				683187C41AE2C95F0065AE21 /* Main.storyboard */,
-				683187E01AE2C9CD0065AE21 /* MainVC.swift */,
 				683187C71AE2C95F0065AE21 /* Images.xcassets */,
 				683187C91AE2C95F0065AE21 /* LaunchScreen.xib */,
 				683187BE1AE2C95F0065AE21 /* Supporting Files */,
@@ -179,7 +179,7 @@
 			name = "Language Objects";
 			sourceTree = "<group>";
 		};
-		688C3FA51AE38B0E00280814 /* Interface Objects */ = {
+		6846777C1AF79D34007C6344 /* VCs */ = {
 			isa = PBXGroup;
 			children = (
 				688C3FA61AE38B3B00280814 /* CodeViewVC.swift */,
@@ -187,17 +187,44 @@
 				688C3FB41AE3AAA400280814 /* RememberListTVC.swift */,
 				688C3FAA1AE3968700280814 /* LitExpressionVC.swift */,
 				680E7CBD1AE4048100DFD06B /* MathExpVC.swift */,
-				688C3FAC1AE39A3F00280814 /* uxExpression.swift */,
-				688C3FAE1AE39A7D00280814 /* uxLitExpression.swift */,
-				688C3FB61AE3ADD800280814 /* uxVarExpression.swift */,
-				688C3FB01AE39BB800280814 /* uxStatement.swift */,
-				688C3FB21AE39BE000280814 /* uxRememberStatement.swift */,
 				688C3FBC1AE3B72600280814 /* GetExpressionTVC.swift */,
-				680E7CB71AE3E56900DFD06B /* uxPrintStatement.swift */,
-				680E7CBB1AE3FC2D00DFD06B /* uxRememberSetStatement.swift */,
+			);
+			name = VCs;
+			sourceTree = "<group>";
+		};
+		6846777D1AF79D61007C6344 /* Interface Language Object */ = {
+			isa = PBXGroup;
+			children = (
 				680E7CBF1AE4076000DFD06B /* uxMathExpression.swift */,
+				680E7CBB1AE3FC2D00DFD06B /* uxRememberSetStatement.swift */,
+				688C3FB21AE39BE000280814 /* uxRememberStatement.swift */,
+				680E7CB71AE3E56900DFD06B /* uxPrintStatement.swift */,
+				688C3FB01AE39BB800280814 /* uxStatement.swift */,
+				688C3FB61AE3ADD800280814 /* uxVarExpression.swift */,
+				688C3FAE1AE39A7D00280814 /* uxLitExpression.swift */,
+				688C3FAC1AE39A3F00280814 /* uxExpression.swift */,
+				6846777E1AF79E76007C6344 /* CodrCore.swift */,
+			);
+			name = "Interface Language Object";
+			sourceTree = "<group>";
+		};
+		688C3FA51AE38B0E00280814 /* Interface Objects */ = {
+			isa = PBXGroup;
+			children = (
+				B89838141AEA9E88001F8C3C /* Globals */,
 			);
 			name = "Interface Objects";
+			sourceTree = "<group>";
+		};
+		B89838141AEA9E88001F8C3C /* Globals */ = {
+			isa = PBXGroup;
+			children = (
+				6846777D1AF79D61007C6344 /* Interface Language Object */,
+				6846777C1AF79D34007C6344 /* VCs */,
+				683187E01AE2C9CD0065AE21 /* MainVC.swift */,
+				683187C41AE2C95F0065AE21 /* Main.storyboard */,
+			);
+			name = Globals;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -311,6 +338,7 @@
 				683187E11AE2C9CD0065AE21 /* MainVC.swift in Sources */,
 				68A80C271AE365B900CCF729 /* varExpr.swift in Sources */,
 				68A80C251AE329E500CCF729 /* boolExpr.swift in Sources */,
+				6846777F1AF79E76007C6344 /* CodrCore.swift in Sources */,
 				688C3FAF1AE39A7D00280814 /* uxLitExpression.swift in Sources */,
 				683187E31AE2CCEC0065AE21 /* CodrJSON.swift in Sources */,
 				688C3FB11AE39BB800280814 /* uxStatement.swift in Sources */,

@@ -10,6 +10,7 @@ import UIKit
 
 class uxStatement: NSObject
 {
+    var value : uxExpression!
     func toJSON() -> String
     {
         return "Generic JSON - Must Inherit"

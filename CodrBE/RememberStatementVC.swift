@@ -10,41 +10,78 @@ import UIKit
 
 class RememberStatementVC: UIViewController
 {
-    var theExpression : uxExpression?
-    var theRememberStatement : uxRememberStatement?
-    var nextScreen = "NONE"
+    var theOldExpression : uxExpression?
     
     @IBOutlet weak var nameTF: UITextField!
     
     @IBOutlet weak var currValueLabel: UILabel!
     
-    @IBAction func selectValueButtonPressed(sender: AnyObject)
+    @IBOutlet weak var selectValueButton: UIButton!
+    
+    @IBOutlet weak var saveButton: UIButton!
+    
+    @IBAction func saveButtonPressed(sender: AnyObject)
     {
-        var getExpressionTVC = self.storyboard?.instantiateViewControllerWithIdentifier("GetExpressionTVC") as! GetExpressionTVC
-        if(theRememberStatement == nil)
+        if(CodrCore.statements.last is uxRememberStatement)
         {
-            theRememberStatement = uxRememberStatement(name: self.nameTF!.text)
+            (CodrCore.statements.last as! uxRememberStatement).name = self.nameTF.text
+        }
+        CodrCore.statements.last?.value = CodrCore.popExpression()
+        CodrCore.addStatementToProgram(CodrCore.popStatement())
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    @IBAction func variableNameIsChanging(sender: UITextField)
+    {
+        (CodrCore.statements.last as! uxRememberStatement).name = sender.text
+        
+        if(count(sender.text) == 0)
+        {
+            selectValueButton.enabled = false
+            saveButton.enabled = false
         }
         else
         {
-            getExpressionTVC.nextScreen = "Change Remember"
+            selectValueButton.enabled = true
+            if(self.currValueLabel.text != "NEW")
+            {
+                saveButton.enabled = true
+            }
         }
-       getExpressionTVC.theStatement = theRememberStatement!
+    }
+    
+    override func viewWillAppear(animated: Bool)
+    {
+        if(self.currValueLabel.text != "NEW")
+        {
+            saveButton.enabled = true
+            self.theOldExpression = nil
+        }
+        else if(self.theOldExpression != nil)
+        {
+            CodrCore.pushExpression(self.theOldExpression!)
+            self.currValueLabel.text = self.theOldExpression?.displayValue()
+            self.theOldExpression = nil
+            saveButton.enabled = true
+        }
+    }
+    
+    @IBAction func selectValueButtonPressed(sender: AnyObject)
+    {
+        if(self.currValueLabel.text != "NEW")
+        {
+            self.theOldExpression = CodrCore.popExpression()
+            self.currValueLabel.text = "NEW"
+        }
+        
+        var getExpressionTVC = self.storyboard?.instantiateViewControllerWithIdentifier("GetExpressionTVC") as! GetExpressionTVC
         self.navigationController?.pushViewController(getExpressionTVC, animated: true)
     }
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
-        if(self.nextScreen == "NONE")
-        {
-            self.nameTF.becomeFirstResponder()
-        }
-        else
-        {
-            //populate the form with the current data
-            self.nameTF.text = self.theRememberStatement!.name
-            self.currValueLabel!.text = self.theRememberStatement!.displayValue()
-        }
+        self.nameTF.becomeFirstResponder()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 

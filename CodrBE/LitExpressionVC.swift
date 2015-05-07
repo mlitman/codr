@@ -10,49 +10,40 @@ import UIKit
 
 class LitExpressionVC: UIViewController
 {
-    var nextScreen = "NONE"
-    var theStatement : uxStatement?
-    var theMathExpression: uxMathExpression?
-
     @IBOutlet weak var litValTF: UITextField!
     
     @IBAction func saveButtonPressed(sender: AnyObject)
     {
-        if(self.theStatement! is uxRememberStatement)
+        (CodrCore.expressions.last as! uxLitExpression).value = litValTF.text
+    
+        //What kind of statement are we creating a literal for?
+        if(CodrCore.statements.last is uxRememberStatement)
         {
-            if(self.nextScreen == "NONE")
+            var sourceVC = self.navigationController!.viewControllers[self.navigationController!.viewControllers.count-3]
+            if(sourceVC is RememberStatementVC)
             {
-                (self.theStatement as! uxRememberStatement).value = uxLitExpression(value: litValTF!.text)
-                CodeViewVC.theStatements.append(self.theStatement!)
+                var rsvc = sourceVC as! RememberStatementVC
+                rsvc.currValueLabel.text = self.litValTF.text
+                self.navigationController?.popToViewController(rsvc, animated: true)
             }
-            else if(self.nextScreen == "Change Remember")
+            else if(sourceVC is MathExpVC)
             {
-                var rememberSet = uxRememberSetStatement(name: (self.theStatement as! uxRememberStatement).name)
-                rememberSet.value = uxLitExpression(value: litValTF!.text)
-                CodeViewVC.theStatements.append(rememberSet)
+                var mevc = sourceVC as! MathExpVC
+                mevc.setExpressionLabel()
+                self.navigationController?.popToViewController(self.navigationController!.viewControllers[self.navigationController!.viewControllers.count-3] as! UIViewController, animated: true)
             }
-            else if(self.nextScreen == "Get Right Math Operand")
-            {
-                self.theMathExpression!.rrand = uxLitExpression(value: litValTF!.text)
-            }
-            else if(self.nextScreen == "Get Left Math Operand")
-            {
-                self.theMathExpression!.lrand = uxLitExpression(value: litValTF!.text)
-            }
-            self.navigationController?.popToRootViewControllerAnimated(true)
         }
-        else if(self.theStatement! is uxPrintStatement)
+        else if(CodrCore.statements.last is uxPrintStatement)
         {
-            if(self.nextScreen == "NONE")
-            {
-                (self.theStatement as! uxPrintStatement).value = uxLitExpression(value: litValTF!.text)
-                CodeViewVC.theStatements.append(self.theStatement!)
-            }
-           self.navigationController?.popToRootViewControllerAnimated(true)
+            (CodrCore.statements.last as! uxPrintStatement).value = uxLitExpression(value:self.litValTF.text)
+            CodrCore.addStatementToProgram(CodrCore.popStatement())
+        self.navigationController?.popToViewController(self.navigationController!.viewControllers[self.navigationController!.viewControllers.count-3] as! UIViewController, animated: true)
+            
         }
     }
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         litValTF.becomeFirstResponder()
         // Do any additional setup after loading the view.
