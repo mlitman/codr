@@ -16,6 +16,7 @@ class CodrCore: NSObject
     static var theToolBox : [String] = ["Create Remember","Change Remember","Print"]
     static var theExpressionTypes : [String] = ["Literal","Remember","Math","Boolean"]
     static var theMathOps = ["+","-","*","/"]
+    static var theLastVCs = [UIViewController]()
     
     static func getRememberStatements() -> [uxRememberStatement]
     {
@@ -33,6 +34,16 @@ class CodrCore: NSObject
     static func addStatementToProgram(var stmt : uxStatement)
     {
         CodrCore.theProgram.append(stmt)
+    }
+    
+    static func pushLastVC(var lastVC: UIViewController)
+    {
+        CodrCore.theLastVCs.append(lastVC)
+    }
+    
+    static func popLastVC() -> UIViewController
+    {
+        return CodrCore.theLastVCs.removeLast()
     }
     
     static func popStatement() -> uxStatement

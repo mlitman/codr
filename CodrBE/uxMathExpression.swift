@@ -16,7 +16,7 @@ class uxMathExpression: uxExpression
     
     override func toJSON() -> String
     {
-        return "{\"type\":\"math-exp\",\"op\":\"\(self.op)\",\"left\":\"\(self.lrand)\",\"right\":\"\(self.rrand)\"}"
+        return "{\"type\":\"math-exp\",\"op\":\"\(self.op)\",\"left\":\(self.lrand.toJSON()),\"right\":\(self.rrand.toJSON())}"
     }
     
     override func displayValue() -> String

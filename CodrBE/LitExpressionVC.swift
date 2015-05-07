@@ -19,26 +19,25 @@ class LitExpressionVC: UIViewController
         //What kind of statement are we creating a literal for?
         if(CodrCore.statements.last is uxRememberStatement)
         {
-            var sourceVC = self.navigationController!.viewControllers[self.navigationController!.viewControllers.count-3]
-            if(sourceVC is RememberStatementVC)
+            if(CodrCore.theLastVCs.last is RememberStatementVC)
             {
-                var rsvc = sourceVC as! RememberStatementVC
+                var rsvc = CodrCore.theLastVCs.last as! RememberStatementVC
                 rsvc.currValueLabel.text = self.litValTF.text
-                self.navigationController?.popToViewController(rsvc, animated: true)
+                self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
             }
-            else if(sourceVC is MathExpVC)
+            else if(CodrCore.theLastVCs.last is MathExpVC)
             {
-                var mevc = sourceVC as! MathExpVC
+                var mevc = CodrCore.theLastVCs.last as! MathExpVC
                 mevc.setExpressionLabel()
-                self.navigationController?.popToViewController(self.navigationController!.viewControllers[self.navigationController!.viewControllers.count-3] as! UIViewController, animated: true)
+                self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
             }
         }
         else if(CodrCore.statements.last is uxPrintStatement)
         {
-            (CodrCore.statements.last as! uxPrintStatement).value = uxLitExpression(value:self.litValTF.text)
+            (CodrCore.expressions.last as! uxLitExpression).value = self.litValTF.text
+            (CodrCore.statements.last as! uxPrintStatement).value = CodrCore.popExpression()
             CodrCore.addStatementToProgram(CodrCore.popStatement())
-        self.navigationController?.popToViewController(self.navigationController!.viewControllers[self.navigationController!.viewControllers.count-3] as! UIViewController, animated: true)
-            
+            self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
         }
     }
     

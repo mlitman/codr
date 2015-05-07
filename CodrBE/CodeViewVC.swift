@@ -113,6 +113,9 @@ class CodeViewVC: UITableViewController
     {
         if(indexPath.section == 0)
         {
+            //Let CodrCore know that we were the dude that called getExpression
+            CodrCore.pushLastVC(self)
+            
             if(CodrCore.theToolBox[indexPath.row] == "Create Remember")
             {
                 CodrCore.pushStatement(uxRememberStatement())

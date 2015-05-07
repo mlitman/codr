@@ -16,6 +16,7 @@ class InterpreterJSON: NSObject
     init(json: JSON)
     {
         self.json = json
+        print(json)
     }
     
     func processExpression(exp : JSON) -> String

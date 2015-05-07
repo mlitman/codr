@@ -31,6 +31,7 @@ class mathExpr: expression
         var answer : Int!
         if(op == "+")
         {
+            print("Calc: \(self.leftVal.toInt()) + \(self.rightVal.toInt())")
             answer = self.leftVal.toInt()! + self.rightVal.toInt()!
         }
         else if(op == "-")

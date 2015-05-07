@@ -57,14 +57,14 @@ class RememberListTVC: UITableViewController
             (CodrCore.expressions.last as! uxVarExpression).name = self.theRemembers[indexPath.row].name
             (CodrCore.statements.last as! uxPrintStatement).value = CodrCore.popExpression()
             CodrCore.addStatementToProgram(CodrCore.popStatement())
-            self.navigationController?.popToViewController(self.navigationController!.viewControllers[self.navigationController!.viewControllers.count-3] as! UIViewController, animated: true)
+            self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
         }
         else if(CodrCore.statements.last is uxRememberStatement)
         {
             (CodrCore.expressions.last as! uxVarExpression).name = self.theRemembers[indexPath.row].name
-            var rsvc = self.navigationController!.viewControllers[self.navigationController!.viewControllers.count-3] as! RememberStatementVC
+            var rsvc = CodrCore.theLastVCs.last as! RememberStatementVC
             rsvc.currValueLabel.text = self.theRemembers[indexPath.row].name
-            self.navigationController?.popToViewController(self.navigationController!.viewControllers[self.navigationController!.viewControllers.count-3] as! UIViewController, animated: true)
+            self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
         }
 
     }

@@ -22,7 +22,6 @@ class CodrJSON: NSObject
     
     func interpretJSON() -> Void
     {
-        
         let data = (self.theJSONstring as NSString).dataUsingEncoding(NSUTF8StringEncoding)
         let json = JSON(data: data!)
         

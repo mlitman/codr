@@ -28,7 +28,7 @@ class RememberStatementVC: UIViewController
         }
         CodrCore.statements.last?.value = CodrCore.popExpression()
         CodrCore.addStatementToProgram(CodrCore.popStatement())
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
     }
     
     @IBAction func variableNameIsChanging(sender: UITextField)
@@ -73,6 +73,9 @@ class RememberStatementVC: UIViewController
             self.theOldExpression = CodrCore.popExpression()
             self.currValueLabel.text = "NEW"
         }
+        
+        //Let CodrCore know that we were the dude that called getExpression
+        CodrCore.pushLastVC(self)
         
         var getExpressionTVC = self.storyboard?.instantiateViewControllerWithIdentifier("GetExpressionTVC") as! GetExpressionTVC
         self.navigationController?.pushViewController(getExpressionTVC, animated: true)

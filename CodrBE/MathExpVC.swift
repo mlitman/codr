@@ -48,10 +48,24 @@ class MathExpVC: UIViewController
     
     @IBAction func saveButtonPressed(sender: AnyObject)
     {
+        if(CodrCore.statements.last is uxRememberStatement)
+        {
+            var rsvc = CodrCore.theLastVCs.last as! RememberStatementVC
+            rsvc.currValueLabel.text = CodrCore.expressions.last?.displayValue()
+            self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
+        }
+        else if(CodrCore.statements.last is uxPrintStatement)
+        {
+            (CodrCore.statements.last as! uxPrintStatement).value = CodrCore.popExpression()
+            CodrCore.addStatementToProgram(CodrCore.popStatement())
+            self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
+        }
+
     }
     
     @IBAction func setRightOpButtonPressed(sender: AnyObject)
     {
+        CodrCore.pushLastVC(self)
         self.lastClickedButton = rightButton
         var getExpressionTVC = self.storyboard?.instantiateViewControllerWithIdentifier("GetExpressionTVC") as! GetExpressionTVC
         self.navigationController?.pushViewController(getExpressionTVC, animated: true)
@@ -59,6 +73,7 @@ class MathExpVC: UIViewController
     
     @IBAction func setLeftOpButtonPressed(sender: AnyObject)
     {
+        CodrCore.pushLastVC(self)
         self.lastClickedButton = leftButton
         var getExpressionTVC = self.storyboard?.instantiateViewControllerWithIdentifier("GetExpressionTVC") as! GetExpressionTVC
         self.navigationController?.pushViewController(getExpressionTVC, animated: true)
