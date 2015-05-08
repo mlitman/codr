@@ -31,6 +31,19 @@ class CodrCore: NSObject
         return theRemembers
     }
     
+    static func hasRemember(var name: String) -> Bool
+    {
+        var theRemembers = CodrCore.getRememberStatements()
+        for aRemember in theRemembers
+        {
+            if(aRemember.name == name)
+            {
+                return true
+            }
+        }
+        return false
+    }
+    
     static func addStatementToProgram(var stmt : uxStatement)
     {
         CodrCore.theProgram.append(stmt)
@@ -43,6 +56,7 @@ class CodrCore: NSObject
     
     static func popLastVC() -> UIViewController
     {
+        println(CodrCore.theLastVCs)
         return CodrCore.theLastVCs.removeLast()
     }
     

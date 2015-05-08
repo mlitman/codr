@@ -11,7 +11,7 @@ import UIKit
 class RememberStatementVC: UIViewController
 {
     var theOldExpression : uxExpression?
-    
+    var nameStartingText = "NEW"
     @IBOutlet weak var nameTF: UITextField!
     
     @IBOutlet weak var currValueLabel: UILabel!
@@ -24,7 +24,18 @@ class RememberStatementVC: UIViewController
     {
         if(CodrCore.statements.last is uxRememberStatement)
         {
+            if(CodrCore.hasRemember(self.nameTF.text))
+            {
+                var av = UIAlertView(title: "Error", message: "Variable Already Exists!", delegate: nil, cancelButtonTitle: "OK")
+                av.show()
+                return
+            }
             (CodrCore.statements.last as! uxRememberStatement).name = self.nameTF.text
+            
+        }
+        else if(CodrCore.statements.last is uxRememberSetStatement)
+        {
+            (CodrCore.statements.last as! uxRememberSetStatement).name = self.nameTF.text
         }
         CodrCore.statements.last?.value = CodrCore.popExpression()
         CodrCore.addStatementToProgram(CodrCore.popStatement())
@@ -84,7 +95,16 @@ class RememberStatementVC: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        self.nameTF.becomeFirstResponder()
+        if(self.nameStartingText != "NEW")
+        {
+            self.nameTF.text = self.nameStartingText
+            self.nameTF.enabled = false
+            self.selectValueButton.enabled = true
+        }
+        else
+        {
+            self.nameTF.becomeFirstResponder()
+        }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 

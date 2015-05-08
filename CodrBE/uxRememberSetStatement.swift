@@ -19,6 +19,6 @@ class uxRememberSetStatement: uxStatement
     
     override func displayValue() -> String
     {
-        return "Remember \(self.name) = \(self.value.displayValue())"
+        return "Changed Remember \(self.name) = \(self.value.displayValue())"
     }
 }

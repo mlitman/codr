@@ -21,7 +21,7 @@ class uxMathExpression: uxExpression
     
     override func displayValue() -> String
     {
-        return self.lrand.displayValue() + " " + self.op + " " + self.rrand.displayValue()
+        return "(\(self.lrand.displayValue()) \(self.op) \(self.rrand.displayValue()))"
     }
 }
 

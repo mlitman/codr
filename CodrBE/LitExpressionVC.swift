@@ -32,11 +32,34 @@ class LitExpressionVC: UIViewController
                 self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
             }
         }
+        else if(CodrCore.statements.last is uxRememberSetStatement)
+        {
+            if(CodrCore.theLastVCs.last is RememberStatementVC)
+            {
+                var rsvc = CodrCore.theLastVCs.last as! RememberStatementVC
+                rsvc.currValueLabel.text = self.litValTF.text
+            }
+            else if(CodrCore.theLastVCs.last is MathExpVC)
+            {
+                var mevc = CodrCore.theLastVCs.last as! MathExpVC
+                mevc.setExpressionLabel()
+            }
+            self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
+
+        }
         else if(CodrCore.statements.last is uxPrintStatement)
         {
             (CodrCore.expressions.last as! uxLitExpression).value = self.litValTF.text
-            (CodrCore.statements.last as! uxPrintStatement).value = CodrCore.popExpression()
-            CodrCore.addStatementToProgram(CodrCore.popStatement())
+            if(CodrCore.theLastVCs.last is CodeViewVC)
+            {
+                (CodrCore.statements.last as! uxPrintStatement).value = CodrCore.popExpression()
+                CodrCore.addStatementToProgram(CodrCore.popStatement())
+            }
+            else if(CodrCore.theLastVCs.last is MathExpVC)
+            {
+                var mevc = CodrCore.theLastVCs.last as! MathExpVC
+                mevc.setExpressionLabel()
+            }
             self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
         }
     }

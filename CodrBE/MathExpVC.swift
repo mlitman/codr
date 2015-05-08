@@ -34,8 +34,8 @@ class MathExpVC: UIViewController
         }
         
         //should we enable the save button?
-        if(self.leftOperandValueLabel != "NEW" &&
-        self.rightOperandValueLabel != "NEW")
+        if(self.leftOperandValueLabel.text != "NEW" &&
+        self.rightOperandValueLabel.text != "NEW")
         {
             self.saveButton!.enabled = true
         }
@@ -48,19 +48,36 @@ class MathExpVC: UIViewController
     
     @IBAction func saveButtonPressed(sender: AnyObject)
     {
-        if(CodrCore.statements.last is uxRememberStatement)
+        if(CodrCore.statements.last is uxRememberStatement ||
+            CodrCore.statements.last is uxRememberSetStatement)
         {
-            var rsvc = CodrCore.theLastVCs.last as! RememberStatementVC
-            rsvc.currValueLabel.text = CodrCore.expressions.last?.displayValue()
-            self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
+            if(CodrCore.theLastVCs.last is RememberStatementVC)
+            {
+                var rsvc = CodrCore.theLastVCs.last as! RememberStatementVC
+                rsvc.currValueLabel.text = CodrCore.expressions.last?.displayValue()
+                self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
+            }
+            else if(CodrCore.theLastVCs.last is MathExpVC)
+            {
+                var mevc = CodrCore.theLastVCs.last as! MathExpVC
+                mevc.setExpressionLabel()
+                self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
+            }
         }
         else if(CodrCore.statements.last is uxPrintStatement)
         {
-            (CodrCore.statements.last as! uxPrintStatement).value = CodrCore.popExpression()
-            CodrCore.addStatementToProgram(CodrCore.popStatement())
+            if(CodrCore.theLastVCs.last is CodeViewVC)
+            {
+                (CodrCore.statements.last as! uxPrintStatement).value = CodrCore.popExpression()
+                CodrCore.addStatementToProgram(CodrCore.popStatement())
+            }
+            else if(CodrCore.theLastVCs.last is MathExpVC)
+            {
+                var mevc = CodrCore.theLastVCs.last as! MathExpVC
+                mevc.setExpressionLabel()
+            }
             self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
         }
-
     }
     
     @IBAction func setRightOpButtonPressed(sender: AnyObject)

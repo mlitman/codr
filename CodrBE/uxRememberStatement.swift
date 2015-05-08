@@ -16,6 +16,10 @@ class uxRememberStatement: uxStatement
     {
         return "{\"type\":\"remember\",\"name\":\"\(self.name)\",\"value\":\(self.value.toJSON())}"
     }
+    func listDisplayValue() -> String
+    {
+        return self.name
+    }
     
     override func displayValue() -> String
     {

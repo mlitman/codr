@@ -45,7 +45,7 @@ class RememberListTVC: UITableViewController
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! UITableViewCell
 
         // Configure the cell...
-        cell.textLabel!.text = self.theRemembers[indexPath.row].displayValue()
+        cell.textLabel!.text = self.theRemembers[indexPath.row].listDisplayValue()
         return cell
     }
     
@@ -55,18 +55,50 @@ class RememberListTVC: UITableViewController
         if(CodrCore.statements.last is uxPrintStatement)
         {
             (CodrCore.expressions.last as! uxVarExpression).name = self.theRemembers[indexPath.row].name
-            (CodrCore.statements.last as! uxPrintStatement).value = CodrCore.popExpression()
-            CodrCore.addStatementToProgram(CodrCore.popStatement())
+            if(CodrCore.theLastVCs.last is CodeViewVC)
+            {
+                (CodrCore.statements.last as! uxPrintStatement).value = CodrCore.popExpression()
+                CodrCore.addStatementToProgram(CodrCore.popStatement())
+            }
+            else if(CodrCore.theLastVCs.last is MathExpVC)
+            {
+                var mevc = CodrCore.theLastVCs.last as! MathExpVC
+                mevc.setExpressionLabel()
+            }
             self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
         }
         else if(CodrCore.statements.last is uxRememberStatement)
         {
             (CodrCore.expressions.last as! uxVarExpression).name = self.theRemembers[indexPath.row].name
-            var rsvc = CodrCore.theLastVCs.last as! RememberStatementVC
-            rsvc.currValueLabel.text = self.theRemembers[indexPath.row].name
-            self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
+            if(CodrCore.theLastVCs.last is RememberStatementVC)
+            {
+                var rsvc = CodrCore.theLastVCs.last as! RememberStatementVC
+                rsvc.currValueLabel.text = self.theRemembers[indexPath.row].name
+                self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
+            }
+            else if(CodrCore.theLastVCs.last is MathExpVC)
+            {
+                var mevc = CodrCore.theLastVCs.last as! MathExpVC
+                mevc.setExpressionLabel()
+                self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
+            }
         }
-
+        else if(CodrCore.statements.last is uxRememberSetStatement)
+        {
+            if(CodrCore.theLastVCs.last is RememberStatementVC)
+            {
+                (CodrCore.expressions.last as! uxVarExpression).name = self.theRemembers[indexPath.row].name
+                var rsvc = CodrCore.theLastVCs.last as! RememberStatementVC
+                rsvc.currValueLabel.text = self.theRemembers[indexPath.row].name
+                self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
+            }
+            else
+            {
+                var rsvc = self.storyboard?.instantiateViewControllerWithIdentifier("RememberStatementVC") as! RememberStatementVC
+                rsvc.nameStartingText = self.theRemembers[indexPath.row].name
+                self.navigationController?.pushViewController(rsvc, animated: true)
+            }
+        }
     }
     
     /*

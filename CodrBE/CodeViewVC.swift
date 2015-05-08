@@ -124,7 +124,6 @@ class CodeViewVC: UITableViewController
             }
             else if(CodrCore.theToolBox[indexPath.row] == "Change Remember")
             {
-                //****CHECK THE LINE BELOW
                 CodrCore.pushStatement(uxRememberSetStatement())
                 var remListTVC = self.storyboard?.instantiateViewControllerWithIdentifier("RememberListTVC") as! RememberListTVC
                 self.navigationController?.pushViewController(remListTVC, animated: true)
