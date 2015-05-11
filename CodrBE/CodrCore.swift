@@ -16,6 +16,8 @@ class CodrCore: NSObject
     static var theToolBox : [String] = ["Create Remember","Change Remember","Print"]
     static var theExpressionTypes : [String] = ["Literal","Remember","Math","Boolean"]
     static var theMathOps = ["+","-","*","/"]
+    static var theArithmeticBooleanOps = ["<","<=",">",">=","==","!="]
+    static var theLogicalBooleanOps = ["and","or","not"]
     static var theLastVCs = [UIViewController]()
     
     static func getRememberStatements() -> [uxRememberStatement]

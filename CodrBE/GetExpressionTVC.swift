@@ -59,7 +59,12 @@ class GetExpressionTVC: UITableViewController
             self.navigationController?.pushViewController(mathExpVC, animated: true)
 
         }
-        
+        else if(CodrCore.theExpressionTypes[indexPath.row] == "Boolean")
+        {
+            CodrCore.pushExpression(uxBooleanExpression())
+            var boolExpVC = self.storyboard?.instantiateViewControllerWithIdentifier("BooleanExpVC") as! BooleanExpVC
+            self.navigationController?.pushViewController(boolExpVC, animated: true)
+        }
     }
     
     // MARK: - Table view data source

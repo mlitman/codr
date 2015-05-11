@@ -259,7 +259,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0oR-v2-qnL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-72.5" y="877.5"/>
+            <point key="canvasLocation" x="-63.5" y="877.5"/>
         </scene>
         <!--Get ExpressionTVC-->
         <scene sceneID="Zau-if-xCb">
@@ -347,6 +347,114 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wkm-tq-j4C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="122.5" y="59.5"/>
+        </scene>
+        <!--Boolean ExpVC-->
+        <scene sceneID="S0Z-5I-RX4">
+            <objects>
+                <viewController storyboardIdentifier="BooleanExpVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rTR-ij-AKb" customClass="BooleanExpVC" customModule="CodrBE" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mqz-f8-Fbp"/>
+                        <viewControllerLayoutGuide type="bottom" id="dsC-hg-t1e"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mIZ-pY-2Qg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Arithmetic Boolean" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vNY-Ae-CUE">
+                                <rect key="frame" x="114" y="72" width="146" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BAZ-gA-Nch">
+                                <rect key="frame" x="133" y="112" width="108" height="30"/>
+                                <state key="normal" title="set left operand">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="setLeftOpButtonPressed:" destination="rTR-ij-AKb" eventType="touchUpInside" id="NpC-tQ-IZU"/>
+                                </connections>
+                            </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="5D8-44-DyY">
+                                <rect key="frame" x="79" y="184" width="216" height="29"/>
+                                <segments>
+                                    <segment title="&lt;"/>
+                                    <segment title="&lt;="/>
+                                    <segment title="&gt;"/>
+                                    <segment title="&gt;="/>
+                                    <segment title="=="/>
+                                    <segment title="!="/>
+                                </segments>
+                                <connections>
+                                    <action selector="opSegmentChanged:" destination="rTR-ij-AKb" eventType="valueChanged" id="mqX-KD-7uL"/>
+                                </connections>
+                            </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LLm-qx-c9C">
+                                <rect key="frame" x="128" y="227" width="118" height="30"/>
+                                <state key="normal" title="set right operand">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="setRightOpButtonPressed:" destination="rTR-ij-AKb" eventType="touchUpInside" id="d5v-0r-kSX"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="NEW" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eub-CU-YPj">
+                                <rect key="frame" x="16" y="254" width="343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uMQ-sm-XmC">
+                                <rect key="frame" x="171" y="296" width="32" height="30"/>
+                                <state key="normal" title="save">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="saveButtonPressed:" destination="rTR-ij-AKb" eventType="touchUpInside" id="VJc-TA-Wco"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="NEW" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Huf-Vk-UKj">
+                                <rect key="frame" x="16" y="142" width="343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="APu-S7-s6z">
+                                <rect key="frame" x="16" y="67" width="51" height="31"/>
+                                <connections>
+                                    <action selector="toggleSegments:" destination="rTR-ij-AKb" eventType="valueChanged" id="rbK-Gu-StB"/>
+                                </connections>
+                            </switch>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="iTk-TT-Xgs">
+                                <rect key="frame" x="79" y="184" width="216" height="29"/>
+                                <segments>
+                                    <segment title="and"/>
+                                    <segment title="or"/>
+                                    <segment title="not"/>
+                                </segments>
+                                <connections>
+                                    <action selector="opSegmentChanged:" destination="rTR-ij-AKb" eventType="valueChanged" id="HFJ-NH-ixY"/>
+                                </connections>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="arithmeticSegments" destination="5D8-44-DyY" id="eWI-qw-3iW"/>
+                        <outlet property="leftButton" destination="BAZ-gA-Nch" id="aff-kt-jkh"/>
+                        <outlet property="leftOperandValueLabel" destination="Huf-Vk-UKj" id="6DR-SL-io4"/>
+                        <outlet property="logicalSegments" destination="iTk-TT-Xgs" id="vUE-y0-MVP"/>
+                        <outlet property="opTypeLabel" destination="vNY-Ae-CUE" id="zK4-yL-fzx"/>
+                        <outlet property="rightButton" destination="LLm-qx-c9C" id="iW1-7h-ZVX"/>
+                        <outlet property="rightOperandValueLabel" destination="eub-CU-YPj" id="C3P-mM-aO1"/>
+                        <outlet property="saveButton" destination="uMQ-sm-XmC" id="5UE-bL-0vk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WgT-ce-ZQZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="327.5" y="877.5"/>
         </scene>
     </scenes>
 </document>

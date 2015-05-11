@@ -11,6 +11,8 @@
 		680E7CBC1AE3FC2D00DFD06B /* uxRememberSetStatement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680E7CBB1AE3FC2D00DFD06B /* uxRememberSetStatement.swift */; };
 		680E7CBE1AE4048100DFD06B /* MathExpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680E7CBD1AE4048100DFD06B /* MathExpVC.swift */; };
 		680E7CC01AE4076000DFD06B /* uxMathExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680E7CBF1AE4076000DFD06B /* uxMathExpression.swift */; };
+		68235F311B011FD600DB4F21 /* BooleanExpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68235F301B011FD600DB4F21 /* BooleanExpVC.swift */; };
+		68235F331B0122ED00DB4F21 /* uxBooleanExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68235F321B0122ED00DB4F21 /* uxBooleanExpression.swift */; };
 		683187C11AE2C95F0065AE21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683187C01AE2C95F0065AE21 /* AppDelegate.swift */; };
 		683187C61AE2C95F0065AE21 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 683187C41AE2C95F0065AE21 /* Main.storyboard */; };
 		683187C81AE2C95F0065AE21 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 683187C71AE2C95F0065AE21 /* Images.xcassets */; };
@@ -55,6 +57,8 @@
 		680E7CBB1AE3FC2D00DFD06B /* uxRememberSetStatement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = uxRememberSetStatement.swift; sourceTree = "<group>"; };
 		680E7CBD1AE4048100DFD06B /* MathExpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathExpVC.swift; sourceTree = "<group>"; };
 		680E7CBF1AE4076000DFD06B /* uxMathExpression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = uxMathExpression.swift; sourceTree = "<group>"; };
+		68235F301B011FD600DB4F21 /* BooleanExpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BooleanExpVC.swift; sourceTree = "<group>"; };
+		68235F321B0122ED00DB4F21 /* uxBooleanExpression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = uxBooleanExpression.swift; sourceTree = "<group>"; };
 		683187BB1AE2C95F0065AE21 /* CodrBE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodrBE.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		683187BF1AE2C95F0065AE21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		683187C01AE2C95F0065AE21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -187,6 +191,7 @@
 				688C3FB41AE3AAA400280814 /* RememberListTVC.swift */,
 				688C3FAA1AE3968700280814 /* LitExpressionVC.swift */,
 				680E7CBD1AE4048100DFD06B /* MathExpVC.swift */,
+				68235F301B011FD600DB4F21 /* BooleanExpVC.swift */,
 				688C3FBC1AE3B72600280814 /* GetExpressionTVC.swift */,
 			);
 			name = VCs;
@@ -196,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				680E7CBF1AE4076000DFD06B /* uxMathExpression.swift */,
+				68235F321B0122ED00DB4F21 /* uxBooleanExpression.swift */,
 				680E7CBB1AE3FC2D00DFD06B /* uxRememberSetStatement.swift */,
 				688C3FB21AE39BE000280814 /* uxRememberStatement.swift */,
 				680E7CB71AE3E56900DFD06B /* uxPrintStatement.swift */,
@@ -329,6 +335,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				680E7CC01AE4076000DFD06B /* uxMathExpression.swift in Sources */,
+				68235F331B0122ED00DB4F21 /* uxBooleanExpression.swift in Sources */,
 				688C3FB31AE39BE000280814 /* uxRememberStatement.swift in Sources */,
 				683187EC1AE3026C0065AE21 /* variableEnv.swift in Sources */,
 				688C3FB71AE3ADD800280814 /* uxVarExpression.swift in Sources */,
@@ -347,6 +354,7 @@
 				680E7CB81AE3E56900DFD06B /* uxPrintStatement.swift in Sources */,
 				68A80C291AE366B000CCF729 /* litExpr.swift in Sources */,
 				688C3FAD1AE39A3F00280814 /* uxExpression.swift in Sources */,
+				68235F311B011FD600DB4F21 /* BooleanExpVC.swift in Sources */,
 				688C3FAB1AE3968700280814 /* LitExpressionVC.swift in Sources */,
 				683187EA1AE300E80065AE21 /* rememberStmt.swift in Sources */,
 				688C3FBD1AE3B72600280814 /* GetExpressionTVC.swift in Sources */,

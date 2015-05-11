@@ -92,6 +92,13 @@ class RememberListTVC: UITableViewController
                 rsvc.currValueLabel.text = self.theRemembers[indexPath.row].name
                 self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
             }
+            else if(CodrCore.theLastVCs.last is MathExpVC)
+            {
+                (CodrCore.expressions.last as! uxVarExpression).name = self.theRemembers[indexPath.row].name
+                var mevc = CodrCore.theLastVCs.last as! MathExpVC
+                mevc.setExpressionLabel()
+                self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
+            }
             else
             {
                 var rsvc = self.storyboard?.instantiateViewControllerWithIdentifier("RememberStatementVC") as! RememberStatementVC
