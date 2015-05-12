@@ -57,11 +57,11 @@ class boolExpr: expression
             rv = false
         }
         
-        if(op == "||")
+        if(op == "or")
         {
             answer = lv || rv
         }
-        else if(op == "&&")
+        else if(op == "and")
         {
             answer = lv && rv
         }

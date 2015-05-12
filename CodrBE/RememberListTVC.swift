@@ -65,6 +65,11 @@ class RememberListTVC: UITableViewController
                 var mevc = CodrCore.theLastVCs.last as! MathExpVC
                 mevc.setExpressionLabel()
             }
+            else if(CodrCore.theLastVCs.last is BooleanExpVC)
+            {
+                var bevc = CodrCore.theLastVCs.last as! BooleanExpVC
+                bevc.setExpressionLabel()
+            }
             self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
         }
         else if(CodrCore.statements.last is uxRememberStatement)
@@ -82,6 +87,12 @@ class RememberListTVC: UITableViewController
                 mevc.setExpressionLabel()
                 self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
             }
+            else if(CodrCore.theLastVCs.last is BooleanExpVC)
+            {
+                var bevc = CodrCore.theLastVCs.last as! BooleanExpVC
+                bevc.setExpressionLabel()
+                self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
+            }
         }
         else if(CodrCore.statements.last is uxRememberSetStatement)
         {
@@ -97,6 +108,13 @@ class RememberListTVC: UITableViewController
                 (CodrCore.expressions.last as! uxVarExpression).name = self.theRemembers[indexPath.row].name
                 var mevc = CodrCore.theLastVCs.last as! MathExpVC
                 mevc.setExpressionLabel()
+                self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
+            }
+            else if(CodrCore.theLastVCs.last is BooleanExpVC)
+            {
+                (CodrCore.expressions.last as! uxVarExpression).name = self.theRemembers[indexPath.row].name
+                var bevc = CodrCore.theLastVCs.last as! BooleanExpVC
+                bevc.setExpressionLabel()
                 self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
             }
             else

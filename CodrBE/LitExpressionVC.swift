@@ -31,6 +31,12 @@ class LitExpressionVC: UIViewController
                 mevc.setExpressionLabel()
                 self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
             }
+            else if(CodrCore.theLastVCs.last is BooleanExpVC)
+            {
+                var bevc = CodrCore.theLastVCs.last as! BooleanExpVC
+                bevc.setExpressionLabel()
+                self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
+            }
         }
         else if(CodrCore.statements.last is uxRememberSetStatement)
         {
@@ -43,6 +49,11 @@ class LitExpressionVC: UIViewController
             {
                 var mevc = CodrCore.theLastVCs.last as! MathExpVC
                 mevc.setExpressionLabel()
+            }
+            else if(CodrCore.theLastVCs.last is BooleanExpVC)
+            {
+                var bevc = CodrCore.theLastVCs.last as! BooleanExpVC
+                bevc.setExpressionLabel()
             }
             self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
 
@@ -59,6 +70,11 @@ class LitExpressionVC: UIViewController
             {
                 var mevc = CodrCore.theLastVCs.last as! MathExpVC
                 mevc.setExpressionLabel()
+            }
+            else if(CodrCore.theLastVCs.last is BooleanExpVC)
+            {
+                var bevc = CodrCore.theLastVCs.last as! BooleanExpVC
+                bevc.setExpressionLabel()
             }
             self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
         }

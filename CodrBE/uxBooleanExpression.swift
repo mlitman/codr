@@ -17,7 +17,7 @@ class uxBooleanExpression: uxExpression
     
     override func toJSON() -> String
     {
-        return "{\"type\":\"\(self.type)-boolean-exp\",\"op\":\"\(self.op)\",\"left\":\(self.lrand.toJSON()),\"right\":\(self.rrand.toJSON())}"
+        return "{\"type\":\"\(self.type)-bool-expr\",\"op\":\"\(self.op)\",\"left\":\(self.lrand.toJSON()),\"right\":\(self.rrand.toJSON())}"
     }
     
     override func displayValue() -> String

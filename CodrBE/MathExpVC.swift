@@ -63,6 +63,12 @@ class MathExpVC: UIViewController
                 mevc.setExpressionLabel()
                 self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
             }
+            else if(CodrCore.theLastVCs.last is BooleanExpVC)
+            {
+                var bevc = CodrCore.theLastVCs.last as! BooleanExpVC
+                bevc.setExpressionLabel()
+                self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
+            }
         }
         else if(CodrCore.statements.last is uxPrintStatement)
         {
@@ -75,6 +81,11 @@ class MathExpVC: UIViewController
             {
                 var mevc = CodrCore.theLastVCs.last as! MathExpVC
                 mevc.setExpressionLabel()
+            }
+            else if(CodrCore.theLastVCs.last is BooleanExpVC)
+            {
+                var bevc = CodrCore.theLastVCs.last as! BooleanExpVC
+                bevc.setExpressionLabel()
             }
             self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
         }

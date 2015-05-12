@@ -54,13 +54,13 @@ class BooleanExpVC: UIViewController
         {
             self.leftOperandValueLabel.text = CodrCore.expressions.last!.displayValue()
             var tempExp = CodrCore.popExpression()
-            (CodrCore.expressions.last as! uxMathExpression).lrand = tempExp
+            self.boolExp.lrand = tempExp
         }
         else if(self.lastClickedButton == self.rightButton)
         {
             self.rightOperandValueLabel.text = CodrCore.expressions.last!.displayValue()
             var tempExp = CodrCore.popExpression()
-            (CodrCore.expressions.last as! uxMathExpression).rrand = tempExp
+            self.boolExp.rrand = tempExp
         }
         
         //should we enable the save button?
@@ -93,6 +93,12 @@ class BooleanExpVC: UIViewController
                 mevc.setExpressionLabel()
                 self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
             }
+            else if(CodrCore.theLastVCs.last is BooleanExpVC)
+            {
+                var bevc = CodrCore.theLastVCs.last as! BooleanExpVC
+                bevc.setExpressionLabel()
+                self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
+            }
         }
         else if(CodrCore.statements.last is uxPrintStatement)
         {
@@ -105,6 +111,11 @@ class BooleanExpVC: UIViewController
             {
                 var mevc = CodrCore.theLastVCs.last as! MathExpVC
                 mevc.setExpressionLabel()
+            }
+            else if(CodrCore.theLastVCs.last is BooleanExpVC)
+            {
+                var bevc = CodrCore.theLastVCs.last as! BooleanExpVC
+                bevc.setExpressionLabel()
             }
             self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
         }
@@ -155,6 +166,7 @@ class BooleanExpVC: UIViewController
         self.logicalSegments.hidden = true
         self.boolExp = CodrCore.expressions.last as! uxBooleanExpression
         self.boolExp.type = "arithmetic"
+        self.boolExp.op = CodrCore.theArithmeticBooleanOps[self.arithmeticSegments.selectedSegmentIndex]
         // Do any additional setup after loading the view.
     }
 
