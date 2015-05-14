@@ -16,7 +16,6 @@ class InterpreterJSON: NSObject
     init(json: JSON)
     {
         self.json = json
-        print(json)
     }
     
     func processExpression(exp : JSON) -> String
@@ -37,7 +36,15 @@ class InterpreterJSON: NSObject
         {
             print("I'm inside ABE lol")
             //process bool-expr
-            theExp = boolExpr(op:exp["op"].stringValue,leftVal: self.processExpression(exp["left"]), rightVal: self.processExpression(exp["right"]))
+            if(exp["op"].stringValue == "not")
+            {
+                println("NOT INSIDE ABE")
+                theExp = boolExpr(op:exp["op"].stringValue, leftVal:"", rightVal: self.processExpression(exp["right"]))
+            }
+            else
+            {
+                theExp = boolExpr(op:exp["op"].stringValue,leftVal: self.processExpression(exp["left"]), rightVal: self.processExpression(exp["right"]))
+            }
         }
         else if(exprType == "math-exp")
         {

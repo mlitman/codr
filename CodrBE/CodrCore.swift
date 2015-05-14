@@ -58,7 +58,6 @@ class CodrCore: NSObject
     
     static func popLastVC() -> UIViewController
     {
-        println(CodrCore.theLastVCs)
         return CodrCore.theLastVCs.removeLast()
     }
     

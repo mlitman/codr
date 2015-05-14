@@ -112,9 +112,23 @@ class MathExpVC: UIViewController
         (CodrCore.expressions.last as! uxMathExpression).op = CodrCore.theMathOps[sender.selectedSegmentIndex]
     }
 
+    func cancelButtonPressed(sender: UIBarButtonItem)
+    {
+        // Perform your custom actions
+        // ...
+        // Go back to the previous ViewController
+        CodrCore.popExpression()
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "cancelButtonPressed:")
+        self.navigationItem.leftBarButtonItem = newBackButton;
+
         (CodrCore.expressions.last as! uxMathExpression).op = CodrCore.theMathOps[opSegments.selectedSegmentIndex]
         // Do any additional setup after loading the view.
     }

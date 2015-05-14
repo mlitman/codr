@@ -8,15 +8,29 @@
 
 import UIKit
 
-class CodeViewVC: UITableViewController
+class CodeViewVC: UIViewController
 {
     @IBOutlet var tv: UITableView!
+    
+    @IBAction func editButtonPressed(sender: UIBarButtonItem)
+    {
+        if(sender.title! == "edit")
+        {
+            self.tv.editing = true
+            sender.title! = "done"
+        }
+        else
+        {
+            self.tv.editing = false
+            sender.title! = "edit"
+        }
+        
+    }
     @IBAction func runButtonPressed(sender: UIBarButtonItem)
     {
         var mainVC = self.storyboard?.instantiateViewControllerWithIdentifier("MainVC") as! MainVC
         mainVC.theJSON = self.genJSON()
         self.navigationController?.pushViewController(mainVC, animated: true)
-
     }
     
     func genJSON() -> String
@@ -45,7 +59,6 @@ class CodeViewVC: UITableViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tv.editing = false
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -60,13 +73,13 @@ class CodeViewVC: UITableViewController
 
     // MARK: - Table view data source
 
-     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
         return 2
     }
 
-     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
         if(section == 0)
@@ -79,7 +92,7 @@ class CodeViewVC: UITableViewController
         }
     }
 
-    override func tableView(tableView: UITableView,
+    func tableView(tableView: UITableView,
         titleForHeaderInSection section: Int) -> String?
     {
         if(section == 0)
@@ -92,14 +105,13 @@ class CodeViewVC: UITableViewController
         }
     }
     
-     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! UITableViewCell
 
         // Configure the cell...
         if(indexPath.section == 0)
         {
             cell.textLabel!.text = CodrCore.theToolBox[indexPath.row]
-            cell.editing = false
         }
         else
         {
@@ -108,7 +120,7 @@ class CodeViewVC: UITableViewController
         return cell
     }
 
-    override func tableView(tableView: UITableView,
+    func tableView(tableView: UITableView,
         didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
         if(indexPath.section == 0)
@@ -140,13 +152,22 @@ class CodeViewVC: UITableViewController
             
         }
     }
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the specified item to be editable.
-        return true
+    
+    func tableView(tableView: UITableView,
+        commitEditingStyle editingStyle: UITableViewCellEditingStyle,
+        forRowAtIndexPath indexPath: NSIndexPath)
+    {
+        CodrCore.theProgram.removeAtIndex(indexPath.row)
+        self.tv.reloadData()
     }
-    */
+    
+    // Override to support conditional editing of the table view.
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool
+    {
+        // Return NO if you do not want the specified item to be editable.
+        return indexPath.section == 1
+    }
+    
 
     /*
     // Override to support editing the table view.
@@ -162,20 +183,24 @@ class CodeViewVC: UITableViewController
 
     
     // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath)
+    func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath)
     {
         if(fromIndexPath.section == 1)
         {
-            var temp = CodrCore.theProgram[fromIndexPath.row]
-            CodrCore.theProgram[toIndexPath.row] = CodrCore.theProgram[fromIndexPath.row]
-            CodrCore.theProgram[fromIndexPath.row] = temp
+            if(toIndexPath.section != 0)
+            {
+                var temp = CodrCore.theProgram[toIndexPath.row]
+                CodrCore.theProgram[toIndexPath.row] = CodrCore.theProgram[fromIndexPath.row]
+                CodrCore.theProgram[fromIndexPath.row] = temp
+            }
         }
+        self.tv.reloadData()
     }
     
 
     
     // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         // Return NO if you do not want the item to be re-orderable.
         if(indexPath.section == 1)
         {

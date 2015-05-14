@@ -64,8 +64,8 @@ class BooleanExpVC: UIViewController
         }
         
         //should we enable the save button?
-        if(self.leftOperandValueLabel.text != "NEW" &&
-            self.rightOperandValueLabel.text != "NEW")
+        if((self.leftOperandValueLabel.text != "NEW" &&
+            self.rightOperandValueLabel.text != "NEW") || (self.rightOperandValueLabel.text != "NEW" && self.boolExp.op == "not"))
         {
             self.saveButton!.enabled = true
         }
@@ -160,8 +160,22 @@ class BooleanExpVC: UIViewController
 
     }
 
+    func cancelButtonPressed(sender: UIBarButtonItem)
+    {
+        // Perform your custom actions
+        // ...
+        // Go back to the previous ViewController
+        CodrCore.popExpression()
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "cancelButtonPressed:")
+        self.navigationItem.leftBarButtonItem = newBackButton;
+
         self.arithmeticSegments.hidden = false
         self.logicalSegments.hidden = true
         self.boolExp = CodrCore.expressions.last as! uxBooleanExpression

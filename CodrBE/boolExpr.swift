@@ -28,7 +28,7 @@ class boolExpr: expression
     
     func isValidLogicalOperator(op: String) -> Bool
     {
-        return op == "||" || op == "&&"
+        return op == "||" || op == "&&" || op == "!"
     }
 
     override func resolve(env : variableEnv) -> String
@@ -65,6 +65,11 @@ class boolExpr: expression
         {
             answer = lv && rv
         }
+        else if(op == "not")
+        {
+            answer = !rv
+        }
+
         return "\(answer)"
         
     }

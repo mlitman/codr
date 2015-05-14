@@ -42,14 +42,20 @@
                             <outlet property="delegate" destination="hDe-iS-p3r" id="HJZ-q0-rel"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" id="Qmw-HS-rjy">
-                        <barButtonItem key="leftBarButtonItem" title="design" id="Xhm-IB-8kt"/>
+                        <barButtonItem key="leftBarButtonItem" title="edit" id="uis-jY-b2k">
+                            <connections>
+                                <action selector="editButtonPressed:" destination="hDe-iS-p3r" id="dZX-J1-56c"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="run" id="4lf-0F-DJz">
                             <connections>
                                 <action selector="runButtonPressed:" destination="hDe-iS-p3r" id="f6J-Wn-IJh"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tv" destination="hew-SA-ILR" id="MJt-kv-jq3"/>
                     </connections>
@@ -282,6 +288,7 @@
                             <outlet property="delegate" destination="Gpk-Pn-Wd6" id="gTM-ns-cvD"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </tableViewController>

@@ -12,9 +12,23 @@ class RememberListTVC: UITableViewController
 {
     var theRemembers : [uxRememberStatement]!
     var theStatement : uxStatement?
+    
+    func cancelButtonPressed(sender: UIBarButtonItem)
+    {
+        // Perform your custom actions
+        // ...
+        // Go back to the previous ViewController
+        CodrCore.popExpression()
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "cancelButtonPressed:")
+        self.navigationItem.leftBarButtonItem = newBackButton;
+
         self.theRemembers = CodrCore.getRememberStatements()        // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 

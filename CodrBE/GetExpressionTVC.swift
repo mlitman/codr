@@ -10,20 +10,21 @@ import UIKit
 
 class GetExpressionTVC: UITableViewController
 {
-    var wasRowSelected = false
-    
-    override func viewWillAppear(animated: Bool)
+    func cancelButtonPressed(sender: UIBarButtonItem)
     {
-        if(self.wasRowSelected)
-        {
-            CodrCore.popExpression()
-            wasRowSelected = false
-        }
+        // Perform your custom actions
+        // ...
+        // Go back to the previous ViewController
+        CodrCore.popStatement()
+        self.navigationController?.popViewControllerAnimated(true)
     }
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
-
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "cancelButtonPressed:")
+        self.navigationItem.leftBarButtonItem = newBackButton;
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -37,9 +38,7 @@ class GetExpressionTVC: UITableViewController
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
-    {
-        self.wasRowSelected = true
-        
+    {        
         if(CodrCore.theExpressionTypes[indexPath.row] == "Literal")
         {
             CodrCore.pushExpression(uxLitExpression())

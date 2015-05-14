@@ -17,12 +17,22 @@ class uxBooleanExpression: uxExpression
     
     override func toJSON() -> String
     {
-        return "{\"type\":\"\(self.type)-bool-expr\",\"op\":\"\(self.op)\",\"left\":\(self.lrand.toJSON()),\"right\":\(self.rrand.toJSON())}"
+        var leftVal = "\"NOT\""
+        if(self.lrand != nil)
+        {
+            leftVal = self.lrand!.toJSON()
+        }
+        return "{\"type\":\"\(self.type)-bool-expr\",\"op\":\"\(self.op)\",\"left\":\(leftVal),\"right\":\(self.rrand.toJSON())}"
     }
     
     override func displayValue() -> String
     {
-        return "(\(self.lrand.displayValue()) \(self.op) \(self.rrand.displayValue()))"
+        var leftVal = ""
+        if(self.lrand != nil)
+        {
+            leftVal = self.lrand!.displayValue()
+        }
+        return "(\(leftVal) \(self.op) \(self.rrand.displayValue()))"
     }
 }
 

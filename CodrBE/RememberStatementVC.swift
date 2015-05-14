@@ -92,9 +92,22 @@ class RememberStatementVC: UIViewController
         self.navigationController?.pushViewController(getExpressionTVC, animated: true)
     }
     
+    func cancelButtonPressed(sender: UIBarButtonItem)
+    {
+        // Perform your custom actions
+        // ...
+        // Go back to the previous ViewController
+        CodrCore.popExpression()
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "cancelButtonPressed:")
+        self.navigationItem.leftBarButtonItem = newBackButton;
+
         if(self.nameStartingText != "NEW")
         {
             self.nameTF.text = self.nameStartingText
