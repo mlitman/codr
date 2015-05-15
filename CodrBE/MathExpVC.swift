@@ -117,7 +117,7 @@ class MathExpVC: UIViewController
         // Perform your custom actions
         // ...
         // Go back to the previous ViewController
-        CodrCore.popExpression()
+        CodrCore.cancelButtonLogic(self)
         self.navigationController?.popViewControllerAnimated(true)
     }
 

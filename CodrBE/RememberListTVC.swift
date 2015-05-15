@@ -18,7 +18,15 @@ class RememberListTVC: UITableViewController
         // Perform your custom actions
         // ...
         // Go back to the previous ViewController
-        CodrCore.popExpression()
+       /* if(!(CodrCore.theLastVCs.last is CodeViewVC))
+        {
+            CodrCore.popExpression()
+        }
+        else
+        {
+            
+        }
+        */
         self.navigationController?.popViewControllerAnimated(true)
     }
 

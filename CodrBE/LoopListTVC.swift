@@ -1,37 +1,19 @@
 //
-//  GetExpressionTVC.swift
+//  LoopListTVC.swift
 //  CodrBE
 //
-//  Created by Michael Litman on 4/19/15.
+//  Created by Michael Litman on 5/15/15.
 //  Copyright (c) 2015 awesomefat. All rights reserved.
 //
 
 import UIKit
 
-class GetExpressionTVC: UITableViewController
+class LoopListTVC: UITableViewController
 {
-    func cancelButtonPressed(sender: UIBarButtonItem)
-    {
-        // Perform your custom actions
-        // ...
-        // Go back to the previous ViewController
-        if(CodrCore.statements.last is uxPrintStatement)
-        {
-            CodrCore.popStatement()
-        }
-        else
-        {
-            
-        }
-        self.navigationController?.popViewControllerAnimated(true)
-    }
-    
-    override func viewDidLoad()
-    {
+
+    override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.hidesBackButton = true
-        let newBackButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "cancelButtonPressed:")
-        self.navigationItem.leftBarButtonItem = newBackButton;
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -44,35 +26,6 @@ class GetExpressionTVC: UITableViewController
         // Dispose of any resources that can be recreated.
     }
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
-    {        
-        if(CodrCore.theExpressionTypes[indexPath.row] == "Literal")
-        {
-            CodrCore.pushExpression(uxLitExpression())
-            var litExpVC = self.storyboard?.instantiateViewControllerWithIdentifier("LitExpressionVC") as! LitExpressionVC
-            self.navigationController?.pushViewController(litExpVC, animated: true)
-        }
-        else if(CodrCore.theExpressionTypes[indexPath.row] == "Remember")
-        {
-            CodrCore.pushExpression(uxVarExpression())
-            var remExpVC = self.storyboard?.instantiateViewControllerWithIdentifier("RememberListTVC") as! RememberListTVC
-            self.navigationController?.pushViewController(remExpVC, animated: true)
-        }
-        else if(CodrCore.theExpressionTypes[indexPath.row] == "Math")
-        {
-            CodrCore.pushExpression(uxMathExpression())
-            var mathExpVC = self.storyboard?.instantiateViewControllerWithIdentifier("MathExpVC") as! MathExpVC
-            self.navigationController?.pushViewController(mathExpVC, animated: true)
-
-        }
-        else if(CodrCore.theExpressionTypes[indexPath.row] == "Boolean")
-        {
-            CodrCore.pushExpression(uxBooleanExpression())
-            var boolExpVC = self.storyboard?.instantiateViewControllerWithIdentifier("BooleanExpVC") as! BooleanExpVC
-            self.navigationController?.pushViewController(boolExpVC, animated: true)
-        }
-    }
-    
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -84,19 +37,25 @@ class GetExpressionTVC: UITableViewController
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return CodrCore.theExpressionTypes.count
+        return CodrCore.theLoopTypes.count
     }
 
-    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! UITableViewCell
 
         // Configure the cell...
-        cell.textLabel!.text = CodrCore.theExpressionTypes[indexPath.row]
+        cell.textLabel!.text = CodrCore.theLoopTypes[indexPath.row]
         return cell
     }
-    
 
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
+        if(CodrCore.theLoopTypes[indexPath.row] == "Repeat")
+        {
+            var rlvc = self.storyboard?.instantiateViewControllerWithIdentifier("RepeatLoopVC") as! RepeatLoopVC
+            self.navigationController?.pushViewController(rlvc, animated: true)
+        }
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {

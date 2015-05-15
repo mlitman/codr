@@ -13,11 +13,12 @@ class CodrCore: NSObject
     static var theProgram = [uxStatement]()
     static var statements = [uxStatement]()
     static var expressions = [uxExpression]()
-    static var theToolBox : [String] = ["Create Remember","Change Remember","Print"]
+    static var theToolBox : [String] = ["Create Remember","Change Remember","Print", "Loop"]
     static var theExpressionTypes : [String] = ["Literal","Remember","Math","Boolean"]
     static var theMathOps = ["+","-","*","/"]
     static var theArithmeticBooleanOps = ["<","<=",">",">=","==","!="]
     static var theLogicalBooleanOps = ["and","or","not"]
+    static var theLoopTypes = ["Repeat","For","While"]
     static var theLastVCs = [UIViewController]()
     
     static func getRememberStatements() -> [uxRememberStatement]
@@ -81,4 +82,12 @@ class CodrCore: NSObject
         CodrCore.expressions.append(expr)
     }
 
+    static func cancelButtonLogic(var vc : UIViewController)
+    {
+        if(vc is LitExpressionVC || vc is MathExpVC || vc is BooleanExpVC)
+        {
+            CodrCore.popExpression()
+        }
+        
+    }
 }

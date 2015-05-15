@@ -146,6 +146,11 @@ class CodeViewVC: UIViewController
                 var getExpressionTVC = self.storyboard?.instantiateViewControllerWithIdentifier("GetExpressionTVC") as! GetExpressionTVC
                 self.navigationController?.pushViewController(getExpressionTVC, animated: true)
             }
+            else if(CodrCore.theToolBox[indexPath.row] == "Loop")
+            {
+                var lltvc = self.storyboard?.instantiateViewControllerWithIdentifier("LoopListTVC") as! LoopListTVC
+                self.navigationController?.pushViewController(lltvc, animated: true)
+            }
         }
         else
         {

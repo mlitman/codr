@@ -97,7 +97,20 @@ class RememberStatementVC: UIViewController
         // Perform your custom actions
         // ...
         // Go back to the previous ViewController
-        CodrCore.popExpression()
+        //if(self.currValueLabel.text != "NEW")
+       // {
+        //    CodrCore.popExpression()
+        //}
+        
+        if(CodrCore.theLastVCs.last is CodeViewVC)
+        {
+            CodrCore.popStatement()
+        }
+        else if(CodrCore.theLastVCs.last is RememberListTVC)
+        {
+            CodrCore.popStatement()
+        }
+        
         self.navigationController?.popViewControllerAnimated(true)
     }
 
