@@ -15,15 +15,8 @@ class GetExpressionTVC: UITableViewController
         // Perform your custom actions
         // ...
         // Go back to the previous ViewController
-        if(CodrCore.statements.last is uxPrintStatement)
-        {
-            CodrCore.popStatement()
-        }
-        else
-        {
-            
-        }
-        self.navigationController?.popViewControllerAnimated(true)
+        CodrCore.cancelButtonLogic(self)
+        self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
     }
     
     override func viewDidLoad()
@@ -45,7 +38,7 @@ class GetExpressionTVC: UITableViewController
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
-    {        
+    {
         if(CodrCore.theExpressionTypes[indexPath.row] == "Literal")
         {
             CodrCore.pushExpression(uxLitExpression())

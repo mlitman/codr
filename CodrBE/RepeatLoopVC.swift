@@ -28,7 +28,7 @@ class RepeatLoopVC: UIViewController
         // Perform your custom actions
         // ...
         // Go back to the previous ViewController
-        CodrCore.popStatement()
+        CodrCore.cancelButtonLogic(self)
         self.navigationController?.popViewControllerAnimated(true)
     }
 

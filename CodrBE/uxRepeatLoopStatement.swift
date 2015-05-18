@@ -8,12 +8,13 @@
 
 import UIKit
 
-class uxLoopStatement: uxStatement
+class uxRepeatLoopStatement: uxStatement
 {
-    var body : uxExpression!
+    var numberOfTimes : Int!
+    
     override func toJSON() -> String
     {
-        return "{\"type\":\"loop\",\"times\":\(self.value.toJSON()),\"body\":\(self.body.toJSON())}"
+        return "{\"type\":\"repeat-loop\",\"times\":\(self.numberOfTimes),\"body\":\(self.value.toJSON())}"
     }
     
     override func displayValue() -> String

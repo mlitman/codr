@@ -15,19 +15,8 @@ class RememberListTVC: UITableViewController
     
     func cancelButtonPressed(sender: UIBarButtonItem)
     {
-        // Perform your custom actions
-        // ...
-        // Go back to the previous ViewController
-       /* if(!(CodrCore.theLastVCs.last is CodeViewVC))
-        {
-            CodrCore.popExpression()
-        }
-        else
-        {
-            
-        }
-        */
-        self.navigationController?.popViewControllerAnimated(true)
+       CodrCore.cancelButtonLogic(self)
+       self.navigationController?.popViewControllerAnimated(true)
     }
 
     override func viewDidLoad()

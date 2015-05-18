@@ -52,6 +52,7 @@ class LoopListTVC: UITableViewController
     {
         if(CodrCore.theLoopTypes[indexPath.row] == "Repeat")
         {
+            CodrCore.pushStatement(uxRepeatLoopStatement())
             var rlvc = self.storyboard?.instantiateViewControllerWithIdentifier("RepeatLoopVC") as! RepeatLoopVC
             self.navigationController?.pushViewController(rlvc, animated: true)
         }

@@ -27,7 +27,7 @@
 		683187F01AE314930065AE21 /* mathExpr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683187EF1AE314930065AE21 /* mathExpr.swift */; };
 		6846777F1AF79E76007C6344 /* CodrCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6846777E1AF79E76007C6344 /* CodrCore.swift */; };
 		68763C101B0642EE00AEFFD9 /* LoopListTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68763C0F1B0642EE00AEFFD9 /* LoopListTVC.swift */; };
-		68763C121B06443100AEFFD9 /* uxLoopStatement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68763C111B06443100AEFFD9 /* uxLoopStatement.swift */; };
+		68763C121B06443100AEFFD9 /* uxRepeatLoopStatement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68763C111B06443100AEFFD9 /* uxRepeatLoopStatement.swift */; };
 		68763C141B06460600AEFFD9 /* RepeatLoopVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68763C131B06460600AEFFD9 /* RepeatLoopVC.swift */; };
 		688C3FA71AE38B3B00280814 /* CodeViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688C3FA61AE38B3B00280814 /* CodeViewVC.swift */; };
 		688C3FA91AE3928900280814 /* RememberStatementVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688C3FA81AE3928900280814 /* RememberStatementVC.swift */; };
@@ -80,7 +80,7 @@
 		683187EF1AE314930065AE21 /* mathExpr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mathExpr.swift; sourceTree = "<group>"; };
 		6846777E1AF79E76007C6344 /* CodrCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodrCore.swift; sourceTree = "<group>"; };
 		68763C0F1B0642EE00AEFFD9 /* LoopListTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoopListTVC.swift; sourceTree = "<group>"; };
-		68763C111B06443100AEFFD9 /* uxLoopStatement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = uxLoopStatement.swift; sourceTree = "<group>"; };
+		68763C111B06443100AEFFD9 /* uxRepeatLoopStatement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = uxRepeatLoopStatement.swift; sourceTree = "<group>"; };
 		68763C131B06460600AEFFD9 /* RepeatLoopVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepeatLoopVC.swift; sourceTree = "<group>"; };
 		688C3FA61AE38B3B00280814 /* CodeViewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeViewVC.swift; sourceTree = "<group>"; };
 		688C3FA81AE3928900280814 /* RememberStatementVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RememberStatementVC.swift; sourceTree = "<group>"; };
@@ -213,7 +213,7 @@
 				680E7CBB1AE3FC2D00DFD06B /* uxRememberSetStatement.swift */,
 				688C3FB21AE39BE000280814 /* uxRememberStatement.swift */,
 				680E7CB71AE3E56900DFD06B /* uxPrintStatement.swift */,
-				68763C111B06443100AEFFD9 /* uxLoopStatement.swift */,
+				68763C111B06443100AEFFD9 /* uxRepeatLoopStatement.swift */,
 				688C3FB01AE39BB800280814 /* uxStatement.swift */,
 				688C3FB61AE3ADD800280814 /* uxVarExpression.swift */,
 				688C3FAE1AE39A7D00280814 /* uxLitExpression.swift */,
@@ -373,7 +373,7 @@
 				683187E71AE2F8410065AE21 /* InterpreterJSON.swift in Sources */,
 				68A80C2B1AE36AFA00CCF729 /* expression.swift in Sources */,
 				680E7CBE1AE4048100DFD06B /* MathExpVC.swift in Sources */,
-				68763C121B06443100AEFFD9 /* uxLoopStatement.swift in Sources */,
+				68763C121B06443100AEFFD9 /* uxRepeatLoopStatement.swift in Sources */,
 				688C3FA71AE38B3B00280814 /* CodeViewVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

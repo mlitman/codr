@@ -88,6 +88,31 @@ class CodrCore: NSObject
         {
             CodrCore.popExpression()
         }
+        else if(vc is RememberStatementVC)
+        {
+            if(CodrCore.statements.last is uxRememberStatement)
+            {
+                CodrCore.popStatement()
+            }
+        }
+        else if(vc is GetExpressionTVC)
+        {
+            if(CodrCore.statements.last is uxPrintStatement)
+            {
+                CodrCore.popStatement()
+            }
+        }
+        else if(vc is RememberListTVC)
+        {
+            if(CodrCore.statements.last is uxRememberSetStatement)
+            {
+                CodrCore.popStatement()
+            }
+        }
+        else if(vc is RepeatLoopVC)
+        {
+            CodrCore.popStatement()
+        }
         
     }
 }

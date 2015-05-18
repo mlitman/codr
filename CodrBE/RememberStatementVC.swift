@@ -94,23 +94,7 @@ class RememberStatementVC: UIViewController
     
     func cancelButtonPressed(sender: UIBarButtonItem)
     {
-        // Perform your custom actions
-        // ...
-        // Go back to the previous ViewController
-        //if(self.currValueLabel.text != "NEW")
-       // {
-        //    CodrCore.popExpression()
-        //}
-        
-        if(CodrCore.theLastVCs.last is CodeViewVC)
-        {
-            CodrCore.popStatement()
-        }
-        else if(CodrCore.theLastVCs.last is RememberListTVC)
-        {
-            CodrCore.popStatement()
-        }
-        
+        CodrCore.cancelButtonLogic(self)
         self.navigationController?.popViewControllerAnimated(true)
     }
 
