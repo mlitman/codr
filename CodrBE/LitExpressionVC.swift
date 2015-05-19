@@ -78,6 +78,13 @@ class LitExpressionVC: UIViewController
             }
             self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
         }
+        else if(CodrCore.statements.last is uxRepeatLoopStatement)
+        {
+            (CodrCore.statements.last as! uxRepeatLoopStatement).value = CodrCore.popExpression()
+            var rlvc = CodrCore.theLastVCs.last as! RepeatLoopVC
+            rlvc.bodyDisplayLabel.text = self.litValTF.text
+            self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
+        }
     }
     
     func cancelButtonPressed(sender: UIBarButtonItem)

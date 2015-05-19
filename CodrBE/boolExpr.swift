@@ -69,7 +69,6 @@ class boolExpr: expression
         {
             answer = !rv
         }
-
         return "\(answer)"
         
     }

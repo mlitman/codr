@@ -84,6 +84,34 @@ class InterpreterJSON: NSObject
                     result = result + "\n\(exprResult)"
                 }
             }
+            else if(json["statements"][i]["type"] == "repeat-loop")
+            {
+                var exprResult = self.processExpression(json["statements"][i]["body"])
+                //build loop output
+                var loopOutput = ""
+                var iterations =
+                for(var i = 0; i < iterations; i++)
+                {
+                    if(count(loopOutput) == 0)
+                    {
+                        loopOutput = exprResult
+                    }
+                    else
+                    {
+                        loopOutput = loopOutput + "\n\(exprResult)"
+                    }
+                }
+                
+                //add the loopOutput to our program output
+                if(count(result) == 0)
+                {
+                    result = loopOutput
+                }
+                else
+                {
+                    result = result + "\n\(loopOutput)"
+                }
+            }
         }
         return result
 

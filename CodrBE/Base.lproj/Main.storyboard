@@ -514,6 +514,9 @@
                                 <rect key="frame" x="246" y="108" width="97" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                <connections>
+                                    <action selector="numberOfTimesTFChanged:" destination="psR-0h-vs2" eventType="editingChanged" id="uzk-PV-Hx0"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cW7-78-dCe">
                                 <rect key="frame" x="142" y="166" width="90" height="30"/>
@@ -535,6 +538,9 @@
                                 <state key="normal" title="save">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="saveButtonPressed:" destination="psR-0h-vs2" eventType="touchUpInside" id="OG9-Yn-sMV"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

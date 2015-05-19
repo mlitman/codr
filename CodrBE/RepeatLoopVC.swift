@@ -23,6 +23,18 @@ class RepeatLoopVC: UIViewController
 
     }
     
+    @IBAction func numberOfTimesTFChanged(sender: AnyObject)
+    {
+        (CodrCore.statements.last as! uxRepeatLoopStatement).numberOfTimes = self.numberOfLoopsTF.text.toInt()
+        self.setSaveButton()
+    }
+    
+    @IBAction func saveButtonPressed(sender: AnyObject)
+    {
+        CodrCore.addStatementToProgram(CodrCore.popStatement())
+        self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
+    }
+
     func cancelButtonPressed(sender: UIBarButtonItem)
     {
         // Perform your custom actions
@@ -32,7 +44,25 @@ class RepeatLoopVC: UIViewController
         self.navigationController?.popViewControllerAnimated(true)
     }
 
-    override func viewDidLoad() {
+    func setSaveButton()
+    {
+        if(self.bodyDisplayLabel.text != "NEW" && count(self.numberOfLoopsTF.text) != 0)
+        {
+            self.saveButton.enabled = true
+        }
+        else
+        {
+            self.saveButton.enabled = false
+        }
+    }
+    
+    override func viewWillAppear(animated: Bool)
+    {
+       self.setSaveButton()
+    }
+    
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         self.numberOfLoopsTF.becomeFirstResponder()
         self.navigationItem.hidesBackButton = true
