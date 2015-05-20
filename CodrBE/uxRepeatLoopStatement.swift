@@ -11,14 +11,15 @@ import UIKit
 class uxRepeatLoopStatement: uxStatement
 {
     var numberOfTimes : Int!
+    var body : uxStatement!
     
     override func toJSON() -> String
     {
-        return "{\"type\":\"repeat-loop\",\"times\":\(self.numberOfTimes),\"body\":\(self.value.toJSON())}"
+        return "{\"type\":\"repeat-loop\",\"times\":\(self.numberOfTimes),\"body\":\(self.body.toJSON())}"
     }
     
     override func displayValue() -> String
     {
-        return "Loop \(self.value.displayValue()) times"
+        return "Loop \(self.body.displayValue()) times"
     }
 }

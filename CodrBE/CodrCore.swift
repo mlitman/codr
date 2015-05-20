@@ -113,6 +113,5 @@ class CodrCore: NSObject
         {
             CodrCore.popStatement()
         }
-        
     }
 }

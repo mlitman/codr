@@ -16,10 +16,16 @@ class RepeatLoopVC: UIViewController
     @IBOutlet weak var numberOfLoopsTF: UITextField!
     @IBAction func setBodyButtonPressed(sender: UIButton)
     {
+        if(self.bodyDisplayLabel.text != "NEW")
+        {
+            CodrCore.popStatement()
+            self.bodyDisplayLabel.text = "NEW"
+        }
+        
         CodrCore.pushLastVC(self)
         
-        var getExpressionTVC = self.storyboard?.instantiateViewControllerWithIdentifier("GetExpressionTVC") as! GetExpressionTVC
-        self.navigationController?.pushViewController(getExpressionTVC, animated: true)
+        var getStatementTVC = self.storyboard?.instantiateViewControllerWithIdentifier("GetStatementTVC") as! GetStatementTVC
+        self.navigationController?.pushViewController(getStatementTVC, animated: true)
 
     }
     

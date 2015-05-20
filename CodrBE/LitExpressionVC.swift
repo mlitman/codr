@@ -76,6 +76,18 @@ class LitExpressionVC: UIViewController
                 var bevc = CodrCore.theLastVCs.last as! BooleanExpVC
                 bevc.setExpressionLabel()
             }
+            else if(CodrCore.theLastVCs.last is GetStatementTVC)
+            {
+                CodrCore.popLastVC()
+                CodrCore.statements.last!.value = CodrCore.popExpression()
+                var thePrintStmt = CodrCore.popStatement() as! uxPrintStatement
+                (CodrCore.statements.last as! uxRepeatLoopStatement).body = thePrintStmt
+                if(CodrCore.theLastVCs.last is RepeatLoopVC)
+                {
+                    var rlvc = CodrCore.theLastVCs.last as! RepeatLoopVC
+                    rlvc.bodyDisplayLabel.text = thePrintStmt.displayValue()
+                }
+            }
             self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
         }
         else if(CodrCore.statements.last is uxRepeatLoopStatement)

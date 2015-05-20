@@ -44,6 +44,7 @@
 		68A80C271AE365B900CCF729 /* varExpr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A80C261AE365B900CCF729 /* varExpr.swift */; };
 		68A80C291AE366B000CCF729 /* litExpr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A80C281AE366B000CCF729 /* litExpr.swift */; };
 		68A80C2B1AE36AFA00CCF729 /* expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A80C2A1AE36AFA00CCF729 /* expression.swift */; };
+		68FC750F1B0CC57B00738FB8 /* GetStatementTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68FC750E1B0CC57B00738FB8 /* GetStatementTVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +99,7 @@
 		68A80C261AE365B900CCF729 /* varExpr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = varExpr.swift; sourceTree = "<group>"; };
 		68A80C281AE366B000CCF729 /* litExpr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = litExpr.swift; sourceTree = "<group>"; };
 		68A80C2A1AE36AFA00CCF729 /* expression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = expression.swift; sourceTree = "<group>"; };
+		68FC750E1B0CC57B00738FB8 /* GetStatementTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetStatementTVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +206,7 @@
 				680E7CBD1AE4048100DFD06B /* MathExpVC.swift */,
 				68235F301B011FD600DB4F21 /* BooleanExpVC.swift */,
 				688C3FBC1AE3B72600280814 /* GetExpressionTVC.swift */,
+				68FC750E1B0CC57B00738FB8 /* GetStatementTVC.swift */,
 			);
 			name = VCs;
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 				68763C141B06460600AEFFD9 /* RepeatLoopVC.swift in Sources */,
 				68763C101B0642EE00AEFFD9 /* LoopListTVC.swift in Sources */,
 				68235F331B0122ED00DB4F21 /* uxBooleanExpression.swift in Sources */,
+				68FC750F1B0CC57B00738FB8 /* GetStatementTVC.swift in Sources */,
 				688C3FB31AE39BE000280814 /* uxRememberStatement.swift in Sources */,
 				683187EC1AE3026C0065AE21 /* variableEnv.swift in Sources */,
 				688C3FB71AE3ADD800280814 /* uxVarExpression.swift in Sources */,

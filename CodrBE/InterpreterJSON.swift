@@ -54,66 +54,72 @@ class InterpreterJSON: NSObject
         return theExp!.resolve(self.env)
     }
     
+    func processStatement(stmt : JSON) -> String
+    {
+        var result = ""
+        if(stmt["type"] == "remember")
+        {
+            //**Check to make sure Remember does not already exist
+            var exprResult = self.processExpression(stmt["value"])
+            self.env.addRemember(stmt["name"].stringValue, value:exprResult)
+        }
+        else if(stmt["type"] == "remember-set")
+        {
+            var exprResult = self.processExpression(stmt["value"])
+            self.env.updateRemember(stmt["name"].stringValue, newValue: exprResult)
+        }
+        else if(stmt["type"] == "print")
+        {
+            var exprResult = self.processExpression(stmt["value"])
+            if(count(result) == 0)
+            {
+                result = exprResult
+            }
+            else
+            {
+                result = result + "\n\(exprResult)"
+            }
+        }
+        else if(stmt["type"] == "repeat-loop")
+        {
+            var exprResult = self.processStatement(stmt["body"])
+            //build loop output
+            var loopOutput = ""
+            var iterations = stmt["times"].stringValue.toInt()
+            for(var i = 0; i < iterations; i++)
+            {
+                if(count(loopOutput) == 0)
+                {
+                    loopOutput = exprResult
+                }
+                else
+                {
+                    loopOutput = loopOutput + "\n\(exprResult)"
+                }
+            }
+            
+            //add the loopOutput to our program output
+            if(count(result) == 0)
+            {
+                result = loopOutput
+            }
+            else
+            {
+                result = result + "\n\(loopOutput)"
+            }
+        }
+        return result
+    }
+    
     func run() -> String
     {
         var numberOfStatements = json["statements"].count
         var result = ""
+
         for i in 0..<numberOfStatements
         {
-            if(json["statements"][i]["type"] == "remember")
-            {
-                //**Check to make sure Remember does not already exist
-                var exprResult = self.processExpression(json["statements"][i]["value"])
-                self.env.addRemember(json["statements"][i]["name"].stringValue, value:exprResult)
-            }
-            else if(json["statements"][i]["type"] == "remember-set")
-            {
-                var exprResult = self.processExpression(json["statements"][i]["value"])
-                println(exprResult)
-                self.env.updateRemember(json["statements"][i]["name"].stringValue, newValue: exprResult)
-            }
-            else if(json["statements"][i]["type"] == "print")
-            {
-                var exprResult = self.processExpression(json["statements"][i]["value"])
-                if(count(result) == 0)
-                {
-                    result = exprResult
-                }
-                else
-                {
-                    result = result + "\n\(exprResult)"
-                }
-            }
-            else if(json["statements"][i]["type"] == "repeat-loop")
-            {
-                var exprResult = self.processExpression(json["statements"][i]["body"])
-                //build loop output
-                var loopOutput = ""
-                var iterations =
-                for(var i = 0; i < iterations; i++)
-                {
-                    if(count(loopOutput) == 0)
-                    {
-                        loopOutput = exprResult
-                    }
-                    else
-                    {
-                        loopOutput = loopOutput + "\n\(exprResult)"
-                    }
-                }
-                
-                //add the loopOutput to our program output
-                if(count(result) == 0)
-                {
-                    result = loopOutput
-                }
-                else
-                {
-                    result = result + "\n\(loopOutput)"
-                }
-            }
+            result += self.processStatement(json["statements"][i]) + "\n"
         }
         return result
-
     }
 }
