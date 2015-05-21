@@ -10,7 +10,7 @@ import UIKit
 
 class uxRepeatLoopStatement: uxStatement
 {
-    var numberOfTimes : Int!
+    var numberOfTimes : uxExpression!
     var body : uxStatement!
     
     override func toJSON() -> String
@@ -20,6 +20,6 @@ class uxRepeatLoopStatement: uxStatement
     
     override func displayValue() -> String
     {
-        return "Loop \(self.body.displayValue()) times"
+        return "Repeat (\(self.body.displayValue())) -> \(self.numberOfTimes) times"
     }
 }

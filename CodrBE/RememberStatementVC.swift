@@ -31,14 +31,31 @@ class RememberStatementVC: UIViewController
                 return
             }
             (CodrCore.statements.last as! uxRememberStatement).name = self.nameTF.text
-            
+            CodrCore.statements.last?.value = CodrCore.popExpression()
+            CodrCore.addStatementToProgram(CodrCore.popStatement())
         }
         else if(CodrCore.statements.last is uxRememberSetStatement)
         {
             (CodrCore.statements.last as! uxRememberSetStatement).name = self.nameTF.text
+            CodrCore.statements.last?.value = CodrCore.popExpression()
+            
+            if(CodrCore.theLastVCs.last is GetStatementTVC)
+            {
+                //we were called from the Repeat Loop
+                CodrCore.popLastVC()
+                if(CodrCore.theLastVCs.last is RepeatLoopVC)
+                {
+                    var theRememberSetStmt = CodrCore.popStatement() as! uxRememberSetStatement
+                    (CodrCore.statements.last as! uxRepeatLoopStatement).body = theRememberSetStmt
+                    var rlvc = CodrCore.theLastVCs.last as! RepeatLoopVC
+                    rlvc.bodyDisplayLabel.text = theRememberSetStmt.displayValue()
+                }
+            }
+            else if(CodrCore.theLastVCs.last is CodeViewVC)
+            {
+                CodrCore.addStatementToProgram(CodrCore.popStatement())
+            }
         }
-        CodrCore.statements.last?.value = CodrCore.popExpression()
-        CodrCore.addStatementToProgram(CodrCore.popStatement())
         self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
     }
     

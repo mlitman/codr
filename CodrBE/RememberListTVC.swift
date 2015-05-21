@@ -81,6 +81,31 @@ class RememberListTVC: UITableViewController
                 var bevc = CodrCore.theLastVCs.last as! BooleanExpVC
                 bevc.setExpressionLabel()
             }
+            else if(CodrCore.theLastVCs.last is GetStatementTVC)
+            {
+                CodrCore.popLastVC()
+                if(CodrCore.theLastVCs.last is RepeatLoopVC)
+                {
+                    CodrCore.statements.last!.value = CodrCore.popExpression()
+                    if(CodrCore.statements.last is uxPrintStatement)
+                    {
+                        var thePrintStmt = CodrCore.popStatement() as! uxPrintStatement
+                        (CodrCore.statements.last as! uxRepeatLoopStatement).body = thePrintStmt
+                    
+                        var rlvc = CodrCore.theLastVCs.last as! RepeatLoopVC
+                        rlvc.bodyDisplayLabel.text = thePrintStmt.displayValue()
+                    }
+                    else if(CodrCore.statements.last is uxRememberSetStatement)
+                    {
+                        var theRememberSetStmt = CodrCore.popStatement() as! uxRememberSetStatement
+                        (CodrCore.statements.last as! uxRepeatLoopStatement).body = theRememberSetStmt
+                        
+                        var rlvc = CodrCore.theLastVCs.last as! RepeatLoopVC
+                        rlvc.bodyDisplayLabel.text = theRememberSetStmt.displayValue()
+                    }
+                }
+
+            }
             self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
         }
         else if(CodrCore.statements.last is uxRememberStatement)

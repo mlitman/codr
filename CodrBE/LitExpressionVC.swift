@@ -79,11 +79,12 @@ class LitExpressionVC: UIViewController
             else if(CodrCore.theLastVCs.last is GetStatementTVC)
             {
                 CodrCore.popLastVC()
-                CodrCore.statements.last!.value = CodrCore.popExpression()
-                var thePrintStmt = CodrCore.popStatement() as! uxPrintStatement
-                (CodrCore.statements.last as! uxRepeatLoopStatement).body = thePrintStmt
                 if(CodrCore.theLastVCs.last is RepeatLoopVC)
                 {
+                    CodrCore.statements.last!.value = CodrCore.popExpression()
+                    var thePrintStmt = CodrCore.popStatement() as! uxPrintStatement
+                    (CodrCore.statements.last as! uxRepeatLoopStatement).body = thePrintStmt
+
                     var rlvc = CodrCore.theLastVCs.last as! RepeatLoopVC
                     rlvc.bodyDisplayLabel.text = thePrintStmt.displayValue()
                 }

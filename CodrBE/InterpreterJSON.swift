@@ -82,19 +82,20 @@ class InterpreterJSON: NSObject
         }
         else if(stmt["type"] == "repeat-loop")
         {
-            var exprResult = self.processStatement(stmt["body"])
+            var stmtResult : String!
             //build loop output
             var loopOutput = ""
             var iterations = stmt["times"].stringValue.toInt()
             for(var i = 0; i < iterations; i++)
             {
+                stmtResult = self.processStatement(stmt["body"])
                 if(count(loopOutput) == 0)
                 {
-                    loopOutput = exprResult
+                    loopOutput = stmtResult
                 }
                 else
                 {
-                    loopOutput = loopOutput + "\n\(exprResult)"
+                    loopOutput = loopOutput + "\n\(stmtResult)"
                 }
             }
             
