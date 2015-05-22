@@ -533,7 +533,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="setBodyButtonPressed:" destination="psR-0h-vs2" eventType="touchUpInside" id="g23-io-Q4d"/>
+                                    <action selector="setIterationsButtonPressed:" destination="psR-0h-vs2" eventType="touchUpInside" id="7Je-Vh-Y0Q"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="NEW" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="69l-Xq-iZW">
@@ -549,6 +549,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="bodyDisplayLabel" destination="XCf-uE-yhE" id="lHZ-jm-1VE"/>
+                        <outlet property="iterationsDisplayLabel" destination="69l-Xq-iZW" id="GbI-hn-oLN"/>
                         <outlet property="saveButton" destination="9Vy-Mf-RPv" id="wTi-Tl-QC4"/>
                     </connections>
                 </viewController>

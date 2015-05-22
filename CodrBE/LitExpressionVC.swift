@@ -93,9 +93,22 @@ class LitExpressionVC: UIViewController
         }
         else if(CodrCore.statements.last is uxRepeatLoopStatement)
         {
-            (CodrCore.statements.last as! uxRepeatLoopStatement).value = CodrCore.popExpression()
+            if(CodrCore.theLastVCs.last is MathExpVC)
+            {
+                var mevc = CodrCore.theLastVCs.last as! MathExpVC
+                mevc.setExpressionLabel()
+            }
+            else if(CodrCore.theLastVCs.last is BooleanExpVC)
+            {
+                var bevc = CodrCore.theLastVCs.last as! BooleanExpVC
+                bevc.setExpressionLabel()
+            }
+            else
+            {
+            (CodrCore.statements.last as! uxRepeatLoopStatement).numberOfTimes = CodrCore.popExpression()
             var rlvc = CodrCore.theLastVCs.last as! RepeatLoopVC
-            rlvc.bodyDisplayLabel.text = self.litValTF.text
+            rlvc.iterationsDisplayLabel.text = self.litValTF.text
+            }
             self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
         }
     }

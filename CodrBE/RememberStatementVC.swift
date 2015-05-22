@@ -12,6 +12,7 @@ class RememberStatementVC: UIViewController
 {
     var theOldExpression : uxExpression?
     var nameStartingText = "NEW"
+    
     @IBOutlet weak var nameTF: UITextField!
     
     @IBOutlet weak var currValueLabel: UILabel!

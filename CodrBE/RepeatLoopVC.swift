@@ -10,10 +10,18 @@ import UIKit
 
 class RepeatLoopVC: UIViewController
 {
-
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var bodyDisplayLabel: UILabel!
-    @IBOutlet weak var numberOfLoopsTF: UITextField!
+    @IBOutlet weak var iterationsDisplayLabel: UILabel!
+    
+    @IBAction func setIterationsButtonPressed(sender: UIButton)
+    {
+        CodrCore.pushLastVC(self)
+        var getExpTVC = self.storyboard?.instantiateViewControllerWithIdentifier("GetExpressionTVC") as! GetExpressionTVC
+        self.navigationController?.pushViewController(getExpTVC, animated: true)
+
+    }
+    
     @IBAction func setBodyButtonPressed(sender: UIButton)
     {
         if(self.bodyDisplayLabel.text != "NEW")
@@ -27,12 +35,6 @@ class RepeatLoopVC: UIViewController
         var getStatementTVC = self.storyboard?.instantiateViewControllerWithIdentifier("GetStatementTVC") as! GetStatementTVC
         self.navigationController?.pushViewController(getStatementTVC, animated: true)
 
-    }
-    
-    @IBAction func numberOfTimesTFChanged(sender: AnyObject)
-    {
-        (CodrCore.statements.last as! uxRepeatLoopStatement).numberOfTimes = self.numberOfLoopsTF.text.toInt()
-        self.setSaveButton()
     }
     
     @IBAction func saveButtonPressed(sender: AnyObject)
@@ -52,7 +54,7 @@ class RepeatLoopVC: UIViewController
 
     func setSaveButton()
     {
-        if(self.bodyDisplayLabel.text != "NEW" && count(self.numberOfLoopsTF.text) != 0)
+        if(self.bodyDisplayLabel.text != "NEW" && self.iterationsDisplayLabel.text != "NEW")
         {
             self.saveButton.enabled = true
         }
@@ -70,7 +72,6 @@ class RepeatLoopVC: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        self.numberOfLoopsTF.becomeFirstResponder()
         self.navigationItem.hidesBackButton = true
         let newBackButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "cancelButtonPressed:")
         self.navigationItem.leftBarButtonItem = newBackButton;

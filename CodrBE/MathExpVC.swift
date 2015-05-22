@@ -55,19 +55,16 @@ class MathExpVC: UIViewController
             {
                 var rsvc = CodrCore.theLastVCs.last as! RememberStatementVC
                 rsvc.currValueLabel.text = CodrCore.expressions.last?.displayValue()
-                self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
             }
             else if(CodrCore.theLastVCs.last is MathExpVC)
             {
                 var mevc = CodrCore.theLastVCs.last as! MathExpVC
                 mevc.setExpressionLabel()
-                self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
             }
             else if(CodrCore.theLastVCs.last is BooleanExpVC)
             {
                 var bevc = CodrCore.theLastVCs.last as! BooleanExpVC
                 bevc.setExpressionLabel()
-                self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
             }
         }
         else if(CodrCore.statements.last is uxPrintStatement)
@@ -87,8 +84,37 @@ class MathExpVC: UIViewController
                 var bevc = CodrCore.theLastVCs.last as! BooleanExpVC
                 bevc.setExpressionLabel()
             }
-            self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
+            else if(CodrCore.theLastVCs.last is RepeatLoopVC)
+            {
+                var rlvc = CodrCore.theLastVCs.last as! RepeatLoopVC
+                rlvc.bodyDisplayLabel.text = (CodrCore.statements.last as! uxRepeatLoopStatement).body.displayValue()
+            }
+            else if(CodrCore.theLastVCs.last is GetStatementTVC)
+            {
+                CodrCore.popLastVC()
+                var rlvc = CodrCore.theLastVCs.last as! RepeatLoopVC
+                var thePrintStmt = CodrCore.popStatement() as! uxPrintStatement
+                thePrintStmt.value = CodrCore.popExpression()
+                (CodrCore.statements.last as! uxRepeatLoopStatement).body = thePrintStmt
+                rlvc.bodyDisplayLabel.text = (CodrCore.statements.last as! uxRepeatLoopStatement).body.displayValue()
+            }
+
         }
+        else if(CodrCore.statements.last is uxRepeatLoopStatement)
+        {
+            if(CodrCore.theLastVCs.last is MathExpVC)
+            {
+                var mevc = CodrCore.theLastVCs.last as! MathExpVC
+                mevc.setExpressionLabel()
+            }
+            else
+            {
+                (CodrCore.statements.last as! uxRepeatLoopStatement).numberOfTimes = CodrCore.popExpression()
+                var rlvc = CodrCore.theLastVCs.last as! RepeatLoopVC
+                rlvc.iterationsDisplayLabel.text = (CodrCore.statements.last as! uxRepeatLoopStatement).numberOfTimes.displayValue()
+            }
+        }
+        self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
     }
     
     @IBAction func setRightOpButtonPressed(sender: AnyObject)

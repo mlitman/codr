@@ -15,11 +15,11 @@ class uxRepeatLoopStatement: uxStatement
     
     override func toJSON() -> String
     {
-        return "{\"type\":\"repeat-loop\",\"times\":\(self.numberOfTimes),\"body\":\(self.body.toJSON())}"
+        return "{\"type\":\"repeat-loop\",\"times\":\(self.numberOfTimes.toJSON()),\"body\":\(self.body.toJSON())}"
     }
     
     override func displayValue() -> String
     {
-        return "Repeat (\(self.body.displayValue())) -> \(self.numberOfTimes) times"
+        return "Repeat (\(self.body.displayValue())) -> \(self.numberOfTimes.displayValue()) times"
     }
 }

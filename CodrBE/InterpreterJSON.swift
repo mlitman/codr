@@ -85,8 +85,8 @@ class InterpreterJSON: NSObject
             var stmtResult : String!
             //build loop output
             var loopOutput = ""
-            var iterations = stmt["times"].stringValue.toInt()
-            for(var i = 0; i < iterations; i++)
+            var iterations = self.processExpression(stmt["times"])
+            for(var i = 0; i < iterations.toInt(); i++)
             {
                 stmtResult = self.processStatement(stmt["body"])
                 if(count(loopOutput) == 0)
