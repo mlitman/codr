@@ -10,8 +10,32 @@ import UIKit
 
 class CodeViewVC: UIViewController
 {
+    var originalCodeViewVC = true
     @IBOutlet var tv: UITableView!
     
+    func cancelButtonPressed(sender: UIBarButtonItem)
+    {
+        // Perform your custom actions
+        // ...
+        // Go back to the previous ViewController
+        CodrCore.cancelButtonLogic(self)
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    func saveButtonPressed(sender: UIBarButtonItem)
+    {
+        //Only exists for non-original CodeViewVC
+        //for example: setting the body of a loop
+        (CodrCore.statements.last as! uxLoopStatement).body = CodrCore.popStatementCollection()
+        if(CodrCore.statements.last is uxRepeatLoopStatement)
+        {
+            //Get rid of the GetStatementVC so I can go back to RepeatLoopVC
+            CodrCore.popLastVC()
+            (CodrCore.theLastVCs.last as! RepeatLoopVC).bodyDisplayLabel.text = (CodrCore.statements.last as! uxLoopStatement).body.displayValue()
+        }
+        self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
+    }
+
     @IBAction func editButtonPressed(sender: UIBarButtonItem)
     {
         if(sender.title! == "edit")
@@ -35,21 +59,8 @@ class CodeViewVC: UIViewController
     
     func genJSON() -> String
     {
-        var answer = ""
-        var header = "{\"statements\":["
-        var footer = "]}"
-        for stmt in CodrCore.theProgram
-        {
-            if(count(answer) == 0)
-            {
-                answer = stmt.toJSON()
-            }
-            else
-            {
-                answer = "\(answer),\(stmt.toJSON())"
-            }
-        }
-        return header + answer + footer
+        //var answer = ""
+        return CodrCore.theStatementCollections.last!.toJSON()
     }
     
     override func viewWillAppear(animated: Bool)
@@ -59,6 +70,19 @@ class CodeViewVC: UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //if I am not the original CodeViewVC, I need to fix menu options
+        if(!self.originalCodeViewVC)
+        {
+            self.navigationItem.hidesBackButton = true
+            let newBackButton = UIBarButtonItem(title: "cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "cancelButtonPressed:")
+            self.navigationItem.leftBarButtonItem = newBackButton;
+            
+            let newRightButton = UIBarButtonItem(title: "save", style: UIBarButtonItemStyle.Plain, target: self, action: "saveButtonPressed:")
+            self.navigationItem.rightBarButtonItem = newRightButton;
+        }
+        //set the initial statement collection for the program
+        CodrCore.pushStatementCollection(uxStatementCollection())
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -88,7 +112,7 @@ class CodeViewVC: UIViewController
         }
         else
         {
-            return CodrCore.theProgram.count
+            return CodrCore.theStatementCollections.last!.theCollection.count
         }
     }
 
@@ -115,7 +139,7 @@ class CodeViewVC: UIViewController
         }
         else
         {
-            cell.textLabel!.text = CodrCore.theProgram[indexPath.row].displayValue()
+            cell.textLabel!.text = CodrCore.theStatementCollections.last!.theCollection[indexPath.row].displayValue()
         }
         return cell
     }
@@ -151,6 +175,12 @@ class CodeViewVC: UIViewController
                 var lltvc = self.storyboard?.instantiateViewControllerWithIdentifier("LoopListTVC") as! LoopListTVC
                 self.navigationController?.pushViewController(lltvc, animated: true)
             }
+            else if(CodrCore.theToolBox[indexPath.row] == "Statement Collection")
+            {
+                var cvvc = self.storyboard?.instantiateViewControllerWithIdentifier("CodeViewVC") as! CodeViewVC
+                cvvc.originalCodeViewVC = false
+            self.navigationController?.pushViewController(cvvc, animated: true)
+            }
         }
         else
         {
@@ -162,7 +192,7 @@ class CodeViewVC: UIViewController
         commitEditingStyle editingStyle: UITableViewCellEditingStyle,
         forRowAtIndexPath indexPath: NSIndexPath)
     {
-        CodrCore.theProgram.removeAtIndex(indexPath.row)
+        CodrCore.theStatementCollections.last!.theCollection.removeAtIndex(indexPath.row)
         self.tv.reloadData()
     }
     
@@ -194,9 +224,9 @@ class CodeViewVC: UIViewController
         {
             if(toIndexPath.section != 0)
             {
-                var temp = CodrCore.theProgram[toIndexPath.row]
-                CodrCore.theProgram[toIndexPath.row] = CodrCore.theProgram[fromIndexPath.row]
-                CodrCore.theProgram[fromIndexPath.row] = temp
+                var temp = CodrCore.theStatementCollections.last!.theCollection[toIndexPath.row]
+                CodrCore.theStatementCollections.last!.theCollection[toIndexPath.row] = CodrCore.theStatementCollections.last!.theCollection[fromIndexPath.row]
+                CodrCore.theStatementCollections.last!.theCollection[fromIndexPath.row] = temp
             }
         }
         self.tv.reloadData()

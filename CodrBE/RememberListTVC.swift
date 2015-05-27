@@ -26,11 +26,8 @@ class RememberListTVC: UITableViewController
         let newBackButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "cancelButtonPressed:")
         self.navigationItem.leftBarButtonItem = newBackButton;
 
-        self.theRemembers = CodrCore.getRememberStatements()        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        self.theRemembers = CodrCore.getRememberStatements()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -62,11 +59,10 @@ class RememberListTVC: UITableViewController
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        (CodrCore.expressions.last as! uxVarExpression).name = self.theRemembers[indexPath.row].name
-        
         //what kind of statement is expecting my value?
         if(CodrCore.statements.last is uxPrintStatement)
         {
+            (CodrCore.expressions.last as! uxVarExpression).name = self.theRemembers[indexPath.row].name
             if(CodrCore.theLastVCs.last is CodeViewVC)
             {
                 (CodrCore.statements.last as! uxPrintStatement).value = CodrCore.popExpression()
@@ -111,10 +107,12 @@ class RememberListTVC: UITableViewController
         }
         else if(CodrCore.statements.last is uxRememberStatement)
         {
+            (CodrCore.expressions.last as! uxVarExpression).name = self.theRemembers[indexPath.row].name
             if(CodrCore.theLastVCs.last is RememberStatementVC)
             {
                 var rsvc = CodrCore.theLastVCs.last as! RememberStatementVC
                 rsvc.currValueLabel.text = self.theRemembers[indexPath.row].name
+            
                 self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
             }
             else if(CodrCore.theLastVCs.last is MathExpVC)
@@ -140,12 +138,14 @@ class RememberListTVC: UITableViewController
             }
             else if(CodrCore.theLastVCs.last is MathExpVC)
             {
+                (CodrCore.expressions.last as! uxVarExpression).name = self.theRemembers[indexPath.row].name
                 var mevc = CodrCore.theLastVCs.last as! MathExpVC
                 mevc.setExpressionLabel()
                 self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
             }
             else if(CodrCore.theLastVCs.last is BooleanExpVC)
             {
+                (CodrCore.expressions.last as! uxVarExpression).name = self.theRemembers[indexPath.row].name
                 var bevc = CodrCore.theLastVCs.last as! BooleanExpVC
                 bevc.setExpressionLabel()
                 self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)

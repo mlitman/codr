@@ -40,10 +40,12 @@
 		688C3FB71AE3ADD800280814 /* uxVarExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688C3FB61AE3ADD800280814 /* uxVarExpression.swift */; };
 		688C3FBD1AE3B72600280814 /* GetExpressionTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688C3FBC1AE3B72600280814 /* GetExpressionTVC.swift */; };
 		68982EEA1B0B69FC0070A0B0 /* repeatLoopStmt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68982EE91B0B69FC0070A0B0 /* repeatLoopStmt.swift */; };
+		68996E001B135090002A53A3 /* uxStatementCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68996DFF1B135090002A53A3 /* uxStatementCollection.swift */; };
 		68A80C251AE329E500CCF729 /* boolExpr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A80C241AE329E500CCF729 /* boolExpr.swift */; };
 		68A80C271AE365B900CCF729 /* varExpr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A80C261AE365B900CCF729 /* varExpr.swift */; };
 		68A80C291AE366B000CCF729 /* litExpr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A80C281AE366B000CCF729 /* litExpr.swift */; };
 		68A80C2B1AE36AFA00CCF729 /* expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A80C2A1AE36AFA00CCF729 /* expression.swift */; };
+		68CDC85F1B14A281006B6365 /* uxLoopStatement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CDC85E1B14A281006B6365 /* uxLoopStatement.swift */; };
 		68FC750F1B0CC57B00738FB8 /* GetStatementTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68FC750E1B0CC57B00738FB8 /* GetStatementTVC.swift */; };
 /* End PBXBuildFile section */
 
@@ -95,10 +97,12 @@
 		688C3FB61AE3ADD800280814 /* uxVarExpression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = uxVarExpression.swift; sourceTree = "<group>"; };
 		688C3FBC1AE3B72600280814 /* GetExpressionTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetExpressionTVC.swift; sourceTree = "<group>"; };
 		68982EE91B0B69FC0070A0B0 /* repeatLoopStmt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = repeatLoopStmt.swift; sourceTree = "<group>"; };
+		68996DFF1B135090002A53A3 /* uxStatementCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = uxStatementCollection.swift; sourceTree = "<group>"; };
 		68A80C241AE329E500CCF729 /* boolExpr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = boolExpr.swift; sourceTree = "<group>"; };
 		68A80C261AE365B900CCF729 /* varExpr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = varExpr.swift; sourceTree = "<group>"; };
 		68A80C281AE366B000CCF729 /* litExpr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = litExpr.swift; sourceTree = "<group>"; };
 		68A80C2A1AE36AFA00CCF729 /* expression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = expression.swift; sourceTree = "<group>"; };
+		68CDC85E1B14A281006B6365 /* uxLoopStatement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = uxLoopStatement.swift; sourceTree = "<group>"; };
 		68FC750E1B0CC57B00738FB8 /* GetStatementTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetStatementTVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -197,6 +201,7 @@
 		6846777C1AF79D34007C6344 /* VCs */ = {
 			isa = PBXGroup;
 			children = (
+				683187E01AE2C9CD0065AE21 /* MainVC.swift */,
 				688C3FA61AE38B3B00280814 /* CodeViewVC.swift */,
 				688C3FA81AE3928900280814 /* RememberStatementVC.swift */,
 				688C3FB41AE3AAA400280814 /* RememberListTVC.swift */,
@@ -218,8 +223,10 @@
 				68235F321B0122ED00DB4F21 /* uxBooleanExpression.swift */,
 				680E7CBB1AE3FC2D00DFD06B /* uxRememberSetStatement.swift */,
 				688C3FB21AE39BE000280814 /* uxRememberStatement.swift */,
+				68996DFF1B135090002A53A3 /* uxStatementCollection.swift */,
 				680E7CB71AE3E56900DFD06B /* uxPrintStatement.swift */,
 				68763C111B06443100AEFFD9 /* uxRepeatLoopStatement.swift */,
+				68CDC85E1B14A281006B6365 /* uxLoopStatement.swift */,
 				688C3FB01AE39BB800280814 /* uxStatement.swift */,
 				688C3FB61AE3ADD800280814 /* uxVarExpression.swift */,
 				688C3FAE1AE39A7D00280814 /* uxLitExpression.swift */,
@@ -242,7 +249,6 @@
 			children = (
 				6846777D1AF79D61007C6344 /* Interface Language Object */,
 				6846777C1AF79D34007C6344 /* VCs */,
-				683187E01AE2C9CD0065AE21 /* MainVC.swift */,
 				683187C41AE2C95F0065AE21 /* Main.storyboard */,
 			);
 			name = Globals;
@@ -355,6 +361,7 @@
 				68235F331B0122ED00DB4F21 /* uxBooleanExpression.swift in Sources */,
 				68FC750F1B0CC57B00738FB8 /* GetStatementTVC.swift in Sources */,
 				688C3FB31AE39BE000280814 /* uxRememberStatement.swift in Sources */,
+				68CDC85F1B14A281006B6365 /* uxLoopStatement.swift in Sources */,
 				683187EC1AE3026C0065AE21 /* variableEnv.swift in Sources */,
 				688C3FB71AE3ADD800280814 /* uxVarExpression.swift in Sources */,
 				683187C11AE2C95F0065AE21 /* AppDelegate.swift in Sources */,
@@ -377,6 +384,7 @@
 				688C3FAB1AE3968700280814 /* LitExpressionVC.swift in Sources */,
 				683187EA1AE300E80065AE21 /* rememberStmt.swift in Sources */,
 				688C3FBD1AE3B72600280814 /* GetExpressionTVC.swift in Sources */,
+				68996E001B135090002A53A3 /* uxStatementCollection.swift in Sources */,
 				680E7CBC1AE3FC2D00DFD06B /* uxRememberSetStatement.swift in Sources */,
 				683187E71AE2F8410065AE21 /* InterpreterJSON.swift in Sources */,
 				68A80C2B1AE36AFA00CCF729 /* expression.swift in Sources */,

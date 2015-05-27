@@ -109,18 +109,29 @@ class InterpreterJSON: NSObject
                 result = result + "\n\(loopOutput)"
             }
         }
+        else if(stmt["type"] == "statement-collection")
+        {
+            var numberOfStatements = stmt["body"].count
+            var collectionResult = ""
+            
+            for i in 0..<numberOfStatements
+            {
+                if(collectionResult == "")
+                {
+                    collectionResult = self.processStatement(stmt["body"][i])
+                }
+                else
+                {
+                    collectionResult += "\n" + self.processStatement(stmt["body"][i])
+                }
+            }
+            result += collectionResult
+        }
         return result
     }
     
     func run() -> String
     {
-        var numberOfStatements = json["statements"].count
-        var result = ""
-
-        for i in 0..<numberOfStatements
-        {
-            result += self.processStatement(json["statements"][i]) + "\n"
-        }
-        return result
+        return self.processStatement(json)
     }
 }

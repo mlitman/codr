@@ -88,6 +88,12 @@ class GetStatementTVC: UITableViewController
             var lltvc = self.storyboard?.instantiateViewControllerWithIdentifier("LoopListTVC") as! LoopListTVC
             self.navigationController?.pushViewController(lltvc, animated: true)
         }
+        else if(CodrCore.theToolBox[indexPath.row] == "Statement Collection")
+        {
+            var cvvc = self.storyboard?.instantiateViewControllerWithIdentifier("CodeViewVC") as! CodeViewVC
+            cvvc.originalCodeViewVC = false
+            self.navigationController?.pushViewController(cvvc, animated: true)
+        }
     }
 
 

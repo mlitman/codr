@@ -10,10 +10,11 @@ import UIKit
 
 class CodrCore: NSObject
 {
-    static var theProgram = [uxStatement]()
+    //static var theProgram = [uxStatement]()
+    static var theStatementCollections = [uxStatementCollection]()
     static var statements = [uxStatement]()
     static var expressions = [uxExpression]()
-    static var theToolBox : [String] = ["Create Remember","Change Remember","Print", "Loop"]
+    static var theToolBox : [String] = ["Create Remember","Change Remember","Print", "Loop", "Statement Collection"]
     static var theExpressionTypes : [String] = ["Literal","Remember","Math","Boolean"]
     static var theMathOps = ["+","-","*","/"]
     static var theArithmeticBooleanOps = ["<","<=",">",">=","==","!="]
@@ -24,7 +25,7 @@ class CodrCore: NSObject
     static func getRememberStatements() -> [uxRememberStatement]
     {
         var theRemembers = [uxRememberStatement]()
-        for stmt in CodrCore.theProgram
+        for stmt in CodrCore.theStatementCollections.last!.theCollection
         {
             if(stmt is uxRememberStatement)
             {
@@ -47,9 +48,19 @@ class CodrCore: NSObject
         return false
     }
     
+    static func pushStatementCollection(var stmtCollection: uxStatementCollection)
+    {
+        CodrCore.theStatementCollections.append(stmtCollection)
+    }
+
+    static func popStatementCollection() -> uxStatementCollection
+    {
+        return CodrCore.theStatementCollections.removeLast()
+    }
+
     static func addStatementToProgram(var stmt : uxStatement)
     {
-        CodrCore.theProgram.append(stmt)
+        CodrCore.theStatementCollections.last!.pushStatement(stmt)
     }
     
     static func pushLastVC(var lastVC: UIViewController)
@@ -59,8 +70,6 @@ class CodrCore: NSObject
     
     static func popLastVC() -> UIViewController
     {
-        println(CodrCore.theLastVCs.last)
-
         return CodrCore.theLastVCs.removeLast()
     }
     

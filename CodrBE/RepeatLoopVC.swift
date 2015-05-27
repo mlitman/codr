@@ -26,7 +26,6 @@ class RepeatLoopVC: UIViewController
     {
         if(self.bodyDisplayLabel.text != "NEW")
         {
-            CodrCore.popStatement()
             self.bodyDisplayLabel.text = "NEW"
         }
         
@@ -39,7 +38,24 @@ class RepeatLoopVC: UIViewController
     
     @IBAction func saveButtonPressed(sender: AnyObject)
     {
-        CodrCore.addStatementToProgram(CodrCore.popStatement())
+        if(CodrCore.theLastVCs.last is GetStatementTVC)
+        {
+            CodrCore.popLastVC()
+            println(CodrCore.theLastVCs.last)
+            if(CodrCore.theLastVCs.last is RepeatLoopVC)
+            {
+                var thisRepeatLoopStatement = CodrCore.popStatement() as! uxRepeatLoopStatement
+                (CodrCore.statements.last as! uxRepeatLoopStatement).body = thisRepeatLoopStatement
+                
+                var rlvc = CodrCore.theLastVCs.last as! RepeatLoopVC
+                rlvc.bodyDisplayLabel.text = thisRepeatLoopStatement.displayValue()
+            }
+        }
+        else
+        {
+            //must be going back to the main CodeView Screen
+            CodrCore.addStatementToProgram(CodrCore.popStatement())
+        }
         self.navigationController?.popToViewController(CodrCore.popLastVC(), animated: true)
     }
 

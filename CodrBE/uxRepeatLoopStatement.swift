@@ -8,10 +8,9 @@
 
 import UIKit
 
-class uxRepeatLoopStatement: uxStatement
+class uxRepeatLoopStatement: uxLoopStatement
 {
     var numberOfTimes : uxExpression!
-    var body : uxStatement!
     
     override func toJSON() -> String
     {
